@@ -1,0 +1,5 @@
+= Setting up new HubPress site
+
+I've just got HubPress setup here on GitHub pages, loving it so far! More to come! :)
+
+:hp-tags: hubpress
