@@ -1,0 +1,21 @@
+= Pixi mouseover example
+
+
+I recently starting playing around with pixi.js but had a tough time finding certain types of code examples. After some searching, I figured I should throw together some examples as I go, so here's the first. It's an example of a simple mouseover effect. A circle starts with a 0.5 alpha value and when hovering over it with the mouse, it changes to alpha value of 1.
+
+Simple eh?
+
+Here's the code:
+
+++++
+<script src="https://gist.github.com/Ugotsta/60572c8435b384d58c59.js"></script>
+++++
+
+And here's a CodePen version as well so you can easily see and interact with it live:
+
+++++
+<p data-height="268" data-theme-id="0" data-slug-hash="NqaLRV" data-default-tab="result" data-user="ugotsta" class='codepen'>See the Pen <a href='http://codepen.io/ugotsta/pen/NqaLRV/'>Pixi.js mouseover example</a> by David Mallonee (<a href='http://codepen.io/ugotsta'>@ugotsta</a>) on <a href='http://codepen.io'>CodePen</a>.</p>
+<script async src="//assets.codepen.io/assets/embed/ei.js"></script>
+++++
+
+:hp-tags: pixi.js, mouseover, events, example, demo
