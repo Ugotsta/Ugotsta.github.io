@@ -1,0 +1,9 @@
+= Experimenting with the Matrix code effect
+
+I've been running a bunch of experiments lately with the Matrix raining code effect, using various JavaScript libraries to achieve it, to find which produces the fastest/best results. So far, pixi.js has been a clear winner.
+
+Here's a quick, full-screen example: http://ugotsta.github.io/projects/pixi-matrix.html
+
+To enter the Matrix, use Google Chrome and press F11 for full-screen, then F5 to refresh.
+
+:hp-tags: matrix, rain, code, pixi, js, javascript
