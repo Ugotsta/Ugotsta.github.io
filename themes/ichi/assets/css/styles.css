@@ -214,10 +214,6 @@ a:hover {
 .site-head .blog-logo img {
     width: 100px;
     height: 100px;
-    -webkit-border-radius: 100px;
-    -moz-border-radius: 100px;
-    -ms-border-radius: 100px;
-    -o-border-radius: 100px;
 }
 
 .site-head .blog-logo:hover {
