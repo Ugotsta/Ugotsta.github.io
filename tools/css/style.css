@@ -1,0 +1,125 @@
+body {
+    font-family: Electrolize;
+    background-color: #000;
+    color: #1B79F1;
+    line-height: 150%;
+}
+
+h2 {
+  font-size: 30px;
+  text-shadow: 0px 0px 12px rgba(27,121,241,0.7);
+  filter: dropshadow(color=#1B79F1, offx=0, offy=0);
+}
+
+h3 {
+  font-size: 20px;
+  text-shadow: 0px 0px 12px rgba(27,121,241,0.7);
+  filter: dropshadow(color=#1B79F1, offx=0, offy=0);
+}
+
+/* Editor styling - for ACE editors */
+
+.ugotsta-editor {
+    position: relative;
+    height: 200px;
+    min-width; 200px;
+    max-width: 100%;
+    
+    background-color: rgba(0,0,0,0);
+    border-radius: 5px;
+    border: 1px solid #1B79F1;
+    
+    font-family: Electrolize;
+    color: #1B79F1;
+}
+
+/* Overrides for ACE editor */
+
+.ace_gutter,
+.ace_gutter-active-line,
+.ace-tomorrow-night-bright .ace_marker-layer .ace_active-line{
+    background: #1B79F1;
+}
+
+/* Various buttons and form elements */
+
+.ugotsta-form {
+    max-width: 100%;
+}
+
+label {
+    display:block; 
+    padding-bottom:5px;
+    margin-top:20px;
+    max-width: 100%;
+}
+
+textarea {
+    width: 300px;
+}
+
+textarea, input {
+    outline: none;
+    background-color: rgba(0,0,0,0);
+    border-radius: 5px;
+    border: 1px solid #1B79F1;
+    padding: 10px;
+    
+    font-family: Electrolize;
+    color: #1B79F1;
+    width: 100%;
+}
+
+textarea:focus,
+input:focus,
+input[type="button"]:hover {
+    outline: none;
+    background-color: #1B79F1;
+    border: 1px solid #1B79F1;
+    
+    color: #000;
+}
+
+/* Scrollbars */
+
+::-webkit-scrollbar {
+  width: 16px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: rgba(27, 121, 241, 0.3);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgba(27, 121, 241, 0.5);
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+  border-right: 1px solid black;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(27, 121, 241, 1);
+}
+
+::-webkit-scrollbar-button {
+  background-color: rgba(27, 121, 241, 0.5);
+  border-right: 1px solid black;
+}
+
+::-webkit-scrollbar-button:hover {
+  background-color: rgba(27, 121, 241, 1);
+}
+
+::-webkit-scrollbar-corner {
+  background-color: black;
+}
+
+/* Transition effects */
+
+a, img, input, textarea {
+    transition: color 0.5s, background-color 0.5s, text-shadow 0.5s, border 0.5s, box-shadow 0.5s;
+}
+
+a:hover, img, input:focus, textarea:focus {
+    transition: color 0.5s, background-color 0.5s, text-shadow 0.5s, border 0.5s, box-shadow 0.5s;
+}

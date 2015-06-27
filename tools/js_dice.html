@@ -1,0 +1,44 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <link href="css/style.css" rel="stylesheet" type="text/css">
+    <script src="js/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript">
+        var dice_types = [4, 6, 8, 10, 12, 20];
+
+        jQuery(document).ready(function() {
+            jQuery("#target").click(function() {
+                var hiya = prompt("Enter a string to jumble.");
+                alert(hiya.jumble());
+            });
+        });
+
+        function rnd(low, high) {
+            return Math.floor((Math.random() * high) + low);
+        }
+
+        String.prototype.jumble = function() {
+            var a = this.split("");
+            var result = "";
+            while (a.length > 0) {
+                //pick random element in a, add it to output, then remove it
+                result += a.splice(rnd(0, a.length), 1);
+            }
+            return result;
+        };
+    </script>
+
+</head>
+
+<body>
+
+    <h3>Title</h3>
+
+    <p>Information.</p>
+
+    <div id="target">Click here to roll the dice!</div>
+
+</body>
+
+</html>

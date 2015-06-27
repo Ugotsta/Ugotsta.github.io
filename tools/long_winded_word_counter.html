@@ -1,0 +1,59 @@
+<!DOCTYPE HTML>
+<html>
+    
+    <head>
+        <link href="css/style.css" rel="stylesheet" type="text/css">
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script src="js/long_winded_word_counter.js"></script>
+        <script>
+            jQuery(document).ready(function() {
+                count();
+                jQuery("#ugotsta-content").bind('change keyup paste blur focus click', function() {
+                    count();
+                });
+            });
+            
+            function count() {
+                var message = $('#ugotsta-content').val();
+                // create array and populate it with word counts
+                var word_count_array = word_count(message);
+                // create result and populate it
+                var result = "";
+                word_count_array.forEach(logArrayElements);
+                function logArrayElements(element, index, array) {
+                    result += element[0] + ": ";
+                    result += element[1] + "\n";
+                }
+                jQuery("#ugotsta-word-count").val(result);
+            }
+        </script>
+    </head>
+    
+    <body>
+        <div id="ugotsta-tools">
+            <h3>Long-winded JavaScript Word Counter</h3>
+            <p>Here we have a very long-winded method of counting words in a given piece of text content using JavaScript.I've avoided the built-in Split() function and gone the manual route for expimentation purposes.</p>
+            <form id="ugotstaToolForm" class="ugotsta-form">
+                <table>
+                    <tr>
+                        <td>
+                            <label for="ugotsta-content">Content to count</label>
+                            <textarea rows="12" cols="100" name="ugotsta-content"
+                            id="ugotsta-content">Enter text to count here.</textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label for="ugotsta-word-count">Word counts</label>
+                            <textarea rows="12" cols="100" name="ugotsta-word-count"
+                            id="ugotsta-word-count"></textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </body>
+
+</html>

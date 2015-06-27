@@ -1,0 +1,145 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+	<link href="css/style.css" rel="stylesheet" type="text/css">
+	<script src="//c9.io/ugotsta/tools/workspace/js/jquery-1.9.1.min.js"></script>
+	<script type="text/javascript">
+		jQuery(document).ready(function() {
+			jQuery('#ugotstaBake').click(function() {
+				ugotstaSimplePluginBake();
+			});
+			jQuery('#ugotstaClear').click(function() {
+				jQuery(':input', '#ugotstaSimplePlugin')
+					.not(':button, :submit, :reset, :hidden')
+					.val('')
+					.removeAttr('checked')
+					.removeAttr('selected');
+			});
+		});
+
+		function ugotstaSimplePluginBake() {
+			//basic plugin data variables
+			var ugotsta_simpleplugin_name = jQuery("#ugotstaSimplePluginName").val();
+			var ugotsta_simpleplugin_uri = jQuery("#ugotstaSimplePluginURI").val();
+			var ugotsta_simpleplugin_description = jQuery("#ugotstaSimplePluginDescription").val();
+			var ugotsta_simpleplugin_version = jQuery("#ugotstaSimplePluginVersion").val();
+			var ugotsta_simpleplugin_author = jQuery("#ugotstaSimplePluginAuthor").val();
+			var ugotsta_simpleplugin_authoruri = jQuery("#ugotstaSimplePluginAuthorURI").val();
+			var ugotsta_simpleplugin_license = jQuery("#ugotstaSimplePluginLicense").val();
+			var ugotsta_simpleplugin_content = jQuery("#ugotstaSimplePluginContent").val();
+			//class and function variables
+
+			var newline = "\r\n";
+			var tab = "\t";
+
+			var output = "<" + "?php" + newline + newline;
+			output += '/' + '*' + newline;
+			output += "Plugin Name: " + ugotsta_simpleplugin_name + newline;
+			output += "Plugin URI: " + ugotsta_simpleplugin_uri + newline;
+			output += "Description: " + ugotsta_simpleplugin_description + newline;
+			output += "Version: " + ugotsta_simpleplugin_version + newline;
+			output += "Author: " + ugotsta_simpleplugin_author + newline;
+			output += "Author URI: " + ugotsta_simpleplugin_authoruri + newline;
+			output += "License: " + ugotsta_simpleplugin_license + newline;
+			output += '*' + '/' + newline + newline;
+
+			//now on to the code
+			output += ugotsta_simpleplugin_content + newline + newline;
+			output += "?" + ">";
+
+			//output the code
+			jQuery("#ugotstaSimplePluginOutput").val(output);
+		}
+	</script>
+
+</head>
+
+<body>
+
+	<h3>Wordpress Simple Plugin Maker</h3>
+	<p>
+		Create your own simple WordPress plugins using the following form! Just enter the requested data and press the <strong>Bake it!</strong> button. The code for your new plugin will appear in the output section at the bottom of the form, all according
+		to the basic plugin code detailed at the <a href="http://codex.wordpress.org/Writing_a_Plugin#File_Headers" alt="Writing a Plugin">Writing a Plugin</a> page at the wordpress.org codex.
+	</p>
+
+	<h3>General Wordpress Plugin Information</h3>
+
+	<form name="ugotstaSimplePlugin" id="ugotstaSimplePlugin">
+		<table border="0" cellspacing="0" cellpadding="0">
+			<tr>
+				<td width="100%">
+					<label for="ugotstaSimplePluginName">Plugin Name:</label>
+					<input type="text" name="ugotstaSimplePluginName" id="ugotstaSimplePluginName" size="40" value="Hello World!" />
+				</td>
+			</tr>
+			<tr>
+				<td width="100%">
+					<label for="ugotstaSimplePluginURI">Plugin URL:</label>
+					<input type="text" name="ugotstaSimplePluginURI" id="ugotstaSimplePluginURI" size="40" value="http://ugotsta.com/wordpress-simple-plugin-maker/" />
+				</td>
+			</tr>
+			<tr>
+				<td width="100%">
+					<label for="ugotstaSimplePluginDescription">Plugin Description:</label>
+					<textarea rows="12" cols="100" name="ugotstaSimplePluginDescription" id="ugotstaSimplePluginDescription">A test plugin that says "Hello World!"</textarea>
+				</td>
+			</tr>
+			<tr>
+				<td width="100%">
+					<label for="ugotstaSimplePluginVersion">Plugin Version:</label>
+					<input type="text" name="ugotstaSimplePluginVersion" id="ugotstaSimplePluginVersion" size="10" value="1.0" />
+				</td>
+			</tr>
+			<tr>
+				<td width="100%">
+					<label for="ugotstaSimplePluginAuthor">Plugin Author:</label>
+					<input type="text" name="ugotstaSimplePluginAuthor" id="ugotstaSimplePluginAuthor" size="40" value="John Doe" />
+				</td>
+			</tr>
+			<tr>
+				<td width="100%">
+					<label for="ugotstaSimplePluginAuthorURI">Plugin Author URL:</label>
+					<input type="text" name="ugotstaSimplePluginAuthorURI" id="ugotstaSimplePluginAuthorURI" size="40" value="http://www.ugotsta.com" />
+				</td>
+			</tr>
+			<tr>
+				<td width="100%">
+					<label for="ugotstaSimplePluginLicense">Plugin License:</label>
+					<input type="text" name="ugotstaSimplePluginLicense" id="ugotstaSimplePluginLicense" size="40" value="GPL 2" />
+				</td>
+			</tr>
+			<tr>
+				<td width="100%">
+					<label for="ugotstaSimplePluginContent">Plugin Content:</label>
+					<textarea rows="12" cols="100" name="ugotstaSimplePluginContent" id="ugotstaSimplePluginContent">echo "Hello world!";</textarea>
+				</td>
+			</tr>
+			<tr>
+				<td width="100%">
+					<input type="button" value="Bake it!" name="ugotstaBake" id="ugotstaBake" />
+				</td>
+			</tr>
+			<tr>
+				<td width="100%">
+					<h3>Your Custom Plugin Code</h3>
+					<label for="ugotstaSimplePluginOutput">OUTPUT:</label>
+					<textarea rows="20" cols="100" name="ugotstaSimplePluginOutput" id="ugotstaSimplePluginOutput"></textarea>
+				</td>
+			</tr>
+			<tr>
+				<td width="100%">
+					<input type="button" value="Clear the form!" name="ugotstaClear" id="ugotstaClear" />
+				</td>
+			</tr>
+		</table>
+	</form>
+
+	<h3>What Do I Do With This?</h3>
+
+	<p>To use the generated code, simply create a text file, paste the code into it and save it. Then, rename the file's extension to PHP and upload it to your plugin folder. You could also create a ZIP file, put the PHP file into it and use the Wordpress Plugins
+		> Add New > Upload option to upload it so you don't have to use FTP.</p>
+
+</body>
+
+</html>

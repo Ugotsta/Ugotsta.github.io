@@ -1,0 +1,109 @@
+<html>
+
+<head>
+	<link href="css/tools.css" rel="stylesheet" type="text/css">
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+	<script language="JavaScript">
+		// set delay for typing effect
+		var typeDelay = '0.040';
+		var terminalHeight = "100";
+		var terminalWidth = "25";
+		
+		// letse go!
+		jQuery(document).ready(function() {
+			jQuery('#ugotstaDoIt').click(function() {
+				ugotstaDoIt();
+			});
+
+			function ugotstaDoIt() {
+				var br = "\r\n";
+				var tab = "  ";
+				// create initialization stuff
+				var result = '{' + br;
+				result += tab + '"version": 1,' + br;
+				result += tab + '"width": ' + terminalWidth + ',' + br;
+				result += tab + '"height": ' + terminalHeight + ',' + br;
+				result += tab + '"duration": 10,' + br;
+				result += tab + '"command": "/usr/bin/fish",' + br;
+				result += tab + '"title": "",' + br;
+				result += tab + '"env": {' + br;
+				result += tab + tab + '"TERM": "xterm",' + br;
+				result += tab + tab + '"SHELL": "/usr/bin/fish"' + br;
+				result += tab + '},' + br;
+				result += tab + '"stdout": [' + br;
+				// get the user's input
+				var content = jQuery("#ugotstaContentToReplace").val();
+				// first enter a string of line breaks to effectively clear screen
+				for (var i = 0; i < 30; i++) {
+					result += tab + tab + '[' + br;
+					result += tab + tab + typeDelay + ',' + br;
+					result += tab + tab + '"' + '\\r\\n' + '"' + br;
+					result += tab + tab + '],';
+				}
+				// iterate over each character to create output string
+				for (var i = 0; i < content.length; i++) {
+					result += tab + tab + '[' + br;
+					result += tab + tab + typeDelay + ',' + br;
+					// handle line breaks
+					if (content[i] == "\n") {
+						//result += "FOUNDS!";
+						result += tab + tab + '"' + '\\r\\n' + '"' + br;
+					} else {
+						result += tab + tab + '"' + content[i] + '"' + br;
+					}
+					result += tab + tab + '],';
+				}
+					result += tab + tab + '[' + br;
+					result += tab + tab + typeDelay + ',' + br;
+					result += tab + tab + '"' + '\\r\\n\\r\\n' + '"' + br;
+					result += tab + tab + ']';
+				// add closing brackets
+				result += "]}";
+				// update result
+				jQuery("#ugotstaReplaceResults").val(result);
+			}
+		});
+	</script>
+
+</head>
+
+<body>
+
+	<h3>Asciinema file creator</h3>
+
+	<p>Easily create a text file for use with <a href="https://asciinema.org/" target="_blank">asciinema</a>. To use, simply do as follows:</p>
+	<ol>
+		<li>Enter text you'd like displayed using asciinema.</li>
+		<li>Press the "Do it!" button.</li>
+		<li>Create a blank file on your computer.</li>
+		<li>Copy-paste the resulting text into that file and save it.</li>
+	</ol>
+	
+	<p>You'll be able to execute that file like so "asciinema play yourfilename".</p>
+	
+	<form id="ugotstaRegexpReplaceForm" class="ugotsta-form">
+		<table>
+			<tr>
+				<td>
+					<label for="ugotstaContentToReplace">Text to make into asciinema file</label>
+					<textarea rows="12" cols="100" name="ugotstaContentToReplace" id="ugotstaContentToReplace">This is a test.</textarea>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<label for="ugotstaReplaceResults">Results</label>
+					<textarea rows="12" cols="100" name="ugotstaReplaceResults" id="ugotstaReplaceResults" /></textarea>
+					</p>
+				</td>
+			</tr>
+			<tr>
+				<td width="100%">
+					<input type="button" value="Do it!" name="ugotstaDoIt" id="ugotstaDoIt" />
+				</td>
+			</tr>
+		</table>
+	</form>
+
+</body>
+
+</html>

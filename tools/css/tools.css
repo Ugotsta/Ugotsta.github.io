@@ -1,0 +1,76 @@
+body {
+    line-height: 150%;
+}
+
+h2 {
+  font-size: 30px;
+}
+
+h3 {
+  font-size: 20px;
+}
+
+/* Editor styling - for ACE editors */
+
+.ugotsta-editor {
+    position: relative;
+    height: 200px;
+    min-width; 200px;
+    max-width: 100%;
+    
+    border-radius: 5px;
+    border: 1px solid #333333;
+
+    color: #666666;
+}
+
+/* Overrides for ACE editor */
+
+.ace_gutter,
+.ace_gutter-active-line,
+.ace-tomorrow-night-bright .ace_marker-layer .ace_active-line{
+    background: #333333;
+}
+
+/* Various buttons and form elements */
+
+.ugotsta-form {
+    max-width: 100%;
+}
+
+label {
+    display:block; 
+    padding-bottom:5px;
+    margin-top:20px;
+    max-width: 100%;
+}
+
+textarea {
+    width: 300px;
+}
+
+textarea, input {
+    outline: none;
+    background-color: rgba(0,0,0,0);
+    border-radius: 5px;
+    border: 1px solid #333333;
+    padding: 10px;
+    
+    width: 100%;
+}
+
+textarea:focus,
+input:focus,
+input[type="button"]:hover {
+    color: #000;
+}
+
+/* Transition effects */
+
+a, img, input, textarea {
+    transition: color 0.5s, background-color 0.5s, text-shadow 0.5s, border 0.5s, box-shadow 0.5s;
+}
+
+a:hover, img, input:focus, textarea:focus {
+    transition: color 0.5s, background-color 0.5s, text-shadow 0.5s, border 0.5s, box-shadow 0.5s;
+}

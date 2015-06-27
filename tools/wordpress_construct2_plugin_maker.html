@@ -1,0 +1,257 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+
+	<link href="css/style.css" rel="stylesheet" type="text/css">
+	<link href='//fonts.googleapis.com/css?family=Electrolize' rel='stylesheet' type='text/css'>
+
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+	<script type="text/javascript">
+		jQuery(document).ready(function() {
+			jQuery('#ugotstaBake').click(function() {
+				ugotstaWPC2PluginBake();
+			});
+
+			function ugotstaWPC2PluginBake() {
+				//basic plugin data variables
+				var ugotsta_wpc2plugin_name = jQuery("#ugotstaWPC2PluginName").val();
+				var ugotsta_wpc2plugin_uri = jQuery("#ugotstaWPC2PluginURI").val();
+				var ugotsta_wpc2plugin_description = jQuery("#ugotstaWPC2PluginDescription").val();
+				var ugotsta_wpc2plugin_version = jQuery("#ugotstaWPC2PluginVersion").val();
+				var ugotsta_wpc2plugin_author = jQuery("#ugotstaWPC2PluginAuthor").val();
+				var ugotsta_wpc2plugin_authoruri = jQuery("#ugotstaWPC2PluginAuthorURI").val();
+				var ugotsta_wpc2plugin_license = jQuery("#ugotstaWPC2PluginLicense").val();
+				var ugotsta_wpc2plugin_content = jQuery("#ugotstaWPC2PluginContent").val();
+				var ugotsta_wpc2plugin_height = jQuery("#ugotstaWPC2PluginHeight").val();
+				var ugotsta_wpc2plugin_width = jQuery("#ugotstaWPC2PluginWidth").val();
+
+				//class and function variables
+				//var ugotsta_dashplugin_content = ugotstaDashPluginContent.getValue();
+				var clean_name = ugotsta_wpc2plugin_name.toLowerCase();
+				var ugotsta_wpc2plugin_name_underscored = clean_name.replace(/ /g, "_");
+				var ugotsta_wpc2plugin_name_hyphenated = clean_name.replace(/ /g, "-");
+				var ugotsta_wpc2pluginc2runtime = ugotsta_wpc2plugin_name_hyphenated;
+
+				var newline = "\r\n";
+				var tab = "\t";
+				var quote_single = "'";
+				var quote_double = '"';
+				var tag_opening = "<";
+
+				var output = "<" + "?php" + newline + newline;
+				output += '/' + '*' + newline;
+				output += "Plugin Name: " + ugotsta_wpc2plugin_name + newline;
+				output += "Plugin URI: " + ugotsta_wpc2plugin_uri + newline;
+				output += "Description: " + ugotsta_wpc2plugin_description + " Available using the [" + ugotsta_wpc2plugin_name_hyphenated + "] shortcode." + newline;
+				output += "Version: " + ugotsta_wpc2plugin_version + newline;
+				output += "Author: " + ugotsta_wpc2plugin_author + newline;
+				output += "Author URI: " + ugotsta_wpc2plugin_authoruri + newline;
+				output += "License: " + ugotsta_wpc2plugin_license + newline;
+				output += '*' + '/' + newline + newline;
+
+				//now on to the code
+				output += "define (" + quote_single + ugotsta_wpc2plugin_name_underscored.toUpperCase() + "_PLUGIN_SELF_DIRNAME" + quote_single + ", basename(dirname(__FILE__)), true);" + newline;
+				output += "if( !defined( " + quote_single + ugotsta_wpc2plugin_name_underscored.toUpperCase() + "_ENQUEUE_ALL_PAGES" + quote_single + " ) ) define( " + quote_single + ugotsta_wpc2plugin_name_underscored.toUpperCase() + "_ENQUEUE_ALL_PAGES" + quote_single + ", false );" + newline + newline;
+				output += "function " + ugotsta_wpc2plugin_name_underscored + "_find_shortcode($posts){" + newline;
+				output += tab + tab + "if ( empty($posts) ) return $posts;" + newline;
+				output += tab + "if ( " + ugotsta_wpc2plugin_name_underscored.toUpperCase() + "_ENQUEUE_ALL_PAGES == false ) {" + newline;
+				output += tab + tab + "$shortcode_found = false;" + newline;
+				output += tab + tab + "foreach ( $posts as $post ){" + newline;
+				output += tab + tab + tab + "if ( preg_match( " + quote_single + "#\\[ *" + ugotsta_wpc2plugin_name_hyphenated + "([^\\]])*\\]#i" + quote_single + ", $post->post_content )){" + newline;
+				output += tab + tab + tab + tab + "$shortcode_found = true;" + newline;
+				output += tab + tab + tab + tab + "break;" + newline;
+				output += tab + tab + tab + "}" + newline;
+				output += tab + tab + "}" + newline;
+				output += tab + tab + "if ( $shortcode_found ){" + newline;
+				output += tab + tab + tab + ugotsta_wpc2plugin_name_underscored + "_enqueue();" + newline;
+				output += tab + tab + "}" + newline;
+				output += tab + "} else {" + newline;
+				output += tab + tab + ugotsta_wpc2plugin_name_underscored + "_enqueue();" + newline;
+				output += tab + "}" + newline;
+				output += tab + "return $posts;" + newline;
+				output += "}" + newline;
+				output += "add_filter( " + quote_single + "the_posts" + quote_single + ", " + quote_single + ugotsta_wpc2plugin_name_underscored + "_find_shortcode" + quote_single + " );" + newline + newline;
+				output += "function " + ugotsta_wpc2plugin_name_underscored + "_enqueue() {" + newline;
+				output += tab + "wp_enqueue_script( " + quote_single + "jquery" + quote_single + " );" + newline;
+				output += tab + "$plugin_url = plugins_url() . " + quote_double + "/" + quote_double + " . " + ugotsta_wpc2plugin_name_underscored.toUpperCase() + "_PLUGIN_SELF_DIRNAME;" + newline;
+				output += tab + "wp_register_script( " + quote_single + ugotsta_wpc2pluginc2runtime + quote_single + ", $plugin_url . " + quote_single + "/" + ugotsta_wpc2pluginc2runtime + ".js" + quote_single + " );" + newline;
+				output += tab + "wp_enqueue_script( " + quote_single + ugotsta_wpc2pluginc2runtime + quote_single + " );" + newline;
+				output += tab + "$data = array( " + quote_single + "plugin_url" + quote_single + " => __( $plugin_url ) );" + newline;
+				output += tab + "wp_localize_script( " + quote_single + ugotsta_wpc2pluginc2runtime + quote_single + ", " + quote_single + ugotsta_wpc2plugin_name_underscored + "_data" + quote_single + ", $data );" + newline;
+				output += "}" + newline;
+				output += "function " + ugotsta_wpc2plugin_name_underscored + "() {" + newline;
+				output += tab + "return " + quote_double;
+				output += tag_opening + "canvas id='" + ugotsta_wpc2plugin_name_underscored + "' width='" + ugotsta_wpc2plugin_width + "' height='" + ugotsta_wpc2plugin_height + "' oncontextmenu='return false;' onselectstart='return false;'>Your browser does not appear to support HTML5.  Try upgrading your browser to the latest version.  " + tag_opening + "a href='http://www.whatbrowser.org'>What is a browser?" + tag_opening + "/a>" + tag_opening + "/canvas>" + tag_opening + "script>jQuery(document).ready(function () { cr.createRuntime('" + ugotsta_wpc2plugin_name_underscored + "'); });" + tag_opening + "/script>";
+				output += quote_double + ";" + newline;
+				output += "}" + newline;
+				output += "add_shortcode( " + quote_single + ugotsta_wpc2plugin_name_hyphenated + quote_single + ", " + quote_single + ugotsta_wpc2plugin_name_underscored + quote_single + "); " + newline + newline;
+				if (ugotsta_wpc2plugin_content !== '') output += ugotsta_wpc2plugin_content + newline + newline;
+				output += "?" + ">";
+
+				//output the code
+				//jQuery("#ugotstaWPC2PluginOutput").val(output);
+				ugotstaWPC2PluginOutput.setValue(output);
+
+				//display some general instructions
+				var info = 'This is your new plugin code. Simply create a new file in your exported project folder.<br/><br/>Name that file as follows: <span class=".text-shadow">' + ugotsta_wpc2plugin_name_hyphenated + '.php</span><br/><br/>Paste the following code into that file and save it.';
+				jQuery("#ugotstaWPC2PluginOutputInfo").html(info);
+				info = 'This is your javascript code. Simply create another new file in your exported project folder.<br/><br/>Name that file as follows: <span class=".text-shadow">' + ugotsta_wpc2pluginc2runtime + '.js</span><br/><br/>Paste the following code into that file and save it.';
+				jQuery("#ugotstaReplaceResultsInfo").html(info);
+				info = 'Now, create a new .zip file in the project folder.<br/><br/>Name that file as follows: <span class=".text-shadow">' + ugotsta_wpc2pluginc2runtime + '.zip</span><br/><br/>Drag and drop all of the files now in your exported project folder into that newly created .zip package (you could also drag and drop just the 2 previously mentioned .php and .js files along with the /images/ and /media/ folders and the logo.png, it will just be simpler to include all the files).';
+				jQuery("#ugotstaWPC2PluginInstructions").html(info);
+
+				//handle the c2runtime.js editing
+				var RegexpContent = jQuery("#ugotstaContentToReplace").val();
+				if (RegexpContent === '') {
+					RegexpResult = "";
+				}
+				else {
+					//replace images/ occurrences
+					var RegexpImages = new RegExp('"images/', "g");
+					var RegexpResult = RegexpContent.replace(RegexpImages, ugotsta_wpc2plugin_name_underscored + '_data.plugin_url + "/images/');
+					//replace media/ occurrences
+					var RegexpMedia = new RegExp('"media/', "g");
+					var RegexpResult = RegexpResult.replace(RegexpMedia, ugotsta_wpc2plugin_name_underscored + '_data.plugin_url + "/media/');
+					//replace logo.png occurrences
+					var RegexpLogo = new RegExp('"logo.png', "g");
+					var RegexpResult = RegexpResult.replace(RegexpLogo, ugotsta_wpc2plugin_name_underscored + '_data.plugin_url + "/logo.png');
+					if (!RegexpResult) {
+						RegexpResult = "";
+					}
+				}
+				//	jQuery("#ugotstaReplaceResults").val( RegexpResult );
+				ugotstaReplaceResults.setValue(RegexpResult);
+			}
+
+		});
+	</script>
+</head>
+
+<body>
+
+	<div id="ugotsta-tools">
+
+		<h3>WordPress plugin maker for Construct 2</h3>
+
+		<p>This special form will walk you through the process of creating your own WordPress plugin for your Construct 2 exported project.</p>
+
+		<form id="ugotstaWPC2Plugin" name="ugotstaWPC2Plugin" class="ugotsta-form">
+			<table>
+				<tr>
+					<td width="100%">
+						<h3>General Plugin Information</h3>
+						<label for="ugotstaWPC2PluginName">Plugin Name (alphanumberic characters only):</label>
+						<input type="text" name="ugotstaWPC2PluginName" id="ugotstaWPC2PluginName" size="40" value="Construct 2 Project" />
+					</td>
+				</tr>
+				<tr>
+					<td width="100%">
+						<label for="ugotstaWPC2PluginURI">Plugin URL:</label>
+						<input type="text" name="ugotstaWPC2PluginURI" id="ugotstaWPC2PluginURI" size="40" value="http://ugotsta.com/wordpress-plugin-maker-for-construct-2/" />
+					</td>
+				</tr>
+				<tr>
+					<td width="100%">
+						<label for="ugotstaWPC2PluginDescription">Plugin Description:</label>
+						<textarea rows="12" cols="100" name="ugotstaWPC2PluginDescription" id="ugotstaWPC2PluginDescription">My Construct 2 Project</textarea>
+					</td>
+				</tr>
+				<tr>
+					<td width="100%">
+						<label for="ugotstaWPC2PluginVersion">Plugin Version:</label>
+						<input type="text" name="ugotstaWPC2PluginVersion" id="ugotstaWPC2PluginVersion" size="10" value="1.0" />
+					</td>
+				</tr>
+				<tr>
+					<td width="100%">
+						<label for="ugotstaWPC2PluginAuthor">Plugin Author:</label>
+						<input type="text" name="ugotstaWPC2PluginAuthor" id="ugotstaWPC2PluginAuthor" size="40" value="John Doe" />
+					</td>
+				</tr>
+				<tr>
+					<td width="100%">
+						<label for="ugotstaWPC2PluginAuthorURI">Plugin Author URL:</label>
+						<input type="text" name="ugotstaWPC2PluginAuthorURI" id="ugotstaWPC2PluginAuthorURI" size="40" value="http://ugotsta.com" />
+					</td>
+				</tr>
+				<tr>
+					<td width="100%">
+						<label for="ugotstaWPC2PluginLicense">Plugin License:</label>
+						<input type="text" name="ugotstaWPC2PluginLicense" id="ugotstaWPC2PluginLicense" size="40" value="GPL 2" />
+					</td>
+				</tr>
+				<tr>
+					<tr>
+						<td width="100%">
+							<label for="ugotstaWPC2PluginHeight">Height of canvas:</label>
+							<input type="text" name="ugotstaWPC2PluginHeight" id="ugotstaWPC2PluginHeight" size="10" value="640" />
+						</td>
+					</tr>
+					<tr>
+						<tr>
+							<td width="100%">
+								<label for="ugotstaWPC2PluginWidth">Width of canvas:</label>
+								<input type="text" name="ugotstaWPC2PluginWidth" id="ugotstaWPC2PluginWidth" size="10" value="400" />
+							</td>
+						</tr>
+						<tr>
+							<td width="100%">
+								<label for="ugotstaWPC2PluginContent">Additional Plugin Code (optional):</label>
+								<textarea rows="10" name="ugotstaWPC2PluginContent" id="ugotstaWPC2PluginContent"></textarea>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<h3>Special adjustments for c2runtime.js</h3>
+								<label for="ugotstaContentToReplace">Paste your existing c2runtime.js code here:</label>
+								<textarea rows="10" cols="100" name="ugotstaContentToReplace" id="ugotstaContentToReplace"></textarea>
+							</td>
+						</tr>
+						<tr>
+							<td width="100%">
+								<input type="button" value="Bake it!" name="ugotstaBake" id="ugotstaBake" />
+							</td>
+						</tr>
+						<tr>
+							<td width="100%">
+								<h3>Your Custom Plugin Code</h3>
+								<span id="ugotstaWPC2PluginOutputInfo">Your new plugin code will be displayed here.</span></br>
+								<div class="ugotsta-editor" id="ugotstaWPC2PluginOutput"></div>
+								<script src="//rawgithub.com/ajaxorg/ace-builds/master/src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
+								<script>
+									var ugotstaWPC2PluginOutput = ace.edit("ugotstaWPC2PluginOutput");
+									ugotstaWPC2PluginOutput.setTheme("ace/theme/tomorrow_night_bright");
+									ugotstaWPC2PluginOutput.renderer.setShowGutter(false);
+									ugotstaWPC2PluginOutput.getSession().setMode("ace/mode/php");
+								</script>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<h3>Your c2runtime.js Code</h3>
+								<span id="ugotstaReplaceResultsInfo">Your plugin's new javascript code will be displayed here.</span></br>
+								<div class="ugotsta-editor" id="ugotstaReplaceResults"></div>
+								<script src="//rawgithub.com/ajaxorg/ace-builds/master/src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
+								<script>
+									var ugotstaReplaceResults = ace.edit("ugotstaReplaceResults");
+									ugotstaReplaceResults.setTheme("ace/theme/tomorrow_night_bright");
+									ugotstaReplaceResults.renderer.setShowGutter(false);
+									ugotstaReplaceResults.getSession().setMode("ace/mode/php");
+								</script>
+							</td>
+						</tr>
+						<tr>
+							<td width="100%">
+								<h3>Final Instructions</h3>
+								<span id="ugotstaWPC2PluginInstructions">Please follow the directions above first.</span>
+							</td>
+						</tr>
+			</table>
+		</form>
+
+	</div>
+
+</body>
+
+</html>

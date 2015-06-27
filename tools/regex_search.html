@@ -1,0 +1,74 @@
+<html>
+
+<head>
+
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+	<script language="JavaScript">
+		jQuery(document).ready(function() {
+			jQuery("#ugotstaContentToSearch").bind('change keyup paste blur focus click', function() {
+				jQuery("#ugotstaRegexSearchResults").val(ugotstaRegExpSearch());
+			});
+			jQuery("#ugotstaSearchPattern").bind('change keyup paste blur focus click', function() {
+				jQuery("#ugotstaRegexSearchResults").val(ugotstaRegExpSearch());
+			});
+
+			function ugotstaRegExpSearch() {
+				var RegexpContent = jQuery("#ugotstaContentToSearch").val();
+				var RegexpPattern = jQuery("#ugotstaSearchPattern").val();
+				if (RegexpContent === '' || RegexpPattern === '') {
+					return "No match found.";
+				}
+				else {
+					var Regexp = new RegExp(RegexpPattern);
+					var RegexpResult = RegexpContent.match(Regexp);
+					if (RegexpResult) {
+						return "Match found at index " + RegexpResult.index + ".";
+					}
+					else {
+						return "No match found.";
+					}
+				}
+			}
+		});
+	</script>
+
+</head>
+
+<body>
+
+	<div id="ugotsta-tools">
+		<h3>Regex Search</h3>
+
+		<p>Search your pasted content using the regular expression you provide. Enter the content to search and your RegExp search pattern then the resulting index (position) of the search will be displayed below.</p>
+
+		<p>Please note, this is a javascript-based regular expression tool which will work differently from other programming languages like Perl, Java, etc.</p>
+
+		<form id="ugotstaWordCounter">
+			<table>
+				<tr>
+					<td>
+						<label for="ugotstaContentToSearch">Content to search</label>
+						<textarea rows="12" cols="100" name="ugotstaContentToSearch" id="ugotstaContentToSearch"></textarea>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label for="ugotstaSearchPattern">Search pattern</label>
+						<input type="text" size="100" name="ugotstaSearchPattern" id="ugotstaSearchPattern">
+						</textarea>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label for="ugotstaSearchResults">Search results</label>
+						<input type="text" size="50" name="ugotstaRegexSearchResults" id="ugotstaRegexSearchResults">
+						</p>
+					</td>
+				</tr>
+			</table>
+		</form>
+	</div>
+
+</body>
+
+</html>

@@ -1,0 +1,170 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+	<link href="css/style.css" rel="stylesheet" type="text/css">
+	<script src="//c9.io/ugotsta/tools/workspace/js/jquery-1.9.1.min.js"></script>
+	<script type="text/javascript">
+		function ugotstaDashPluginBake() {
+			//basic plugin data variables
+			var ugotsta_dashplugin_name = document.ugotstaDashPlugin.ugotstaDashPluginName.value;
+			var ugotsta_dashplugin_uri = document.ugotstaDashPlugin.ugotstaDashPluginURI.value;
+			var ugotsta_dashplugin_description = document.ugotstaDashPlugin.ugotstaDashPluginDescription.value;
+			var ugotsta_dashplugin_version = document.ugotstaDashPlugin.ugotstaDashPluginVersion.value;
+			var ugotsta_dashplugin_author = document.ugotstaDashPlugin.ugotstaDashPluginAuthor.value;
+			var ugotsta_dashplugin_authoruri = document.ugotstaDashPlugin.ugotstaDashPluginAuthorURI.value;
+			var ugotsta_dashplugin_license = document.ugotstaDashPlugin.ugotstaDashPluginLicense.value;
+			//class and function variables
+			var ugotsta_dashplugin_content = ugotstaDashPluginContent.getValue();
+			var ugotsta_dashplugin_prefix = document.ugotstaDashPlugin.ugotstaDashPluginPrefix.value;
+			var ugotsta_dashplugin_class = ugotsta_dashplugin_prefix + '_DashboardWidget';
+			var ugotsta_dashplugin_id = ugotsta_dashplugin_prefix + '-dashboard-widget';
+			var ugotsta_dashplugin_title = document.ugotstaDashPlugin.ugotstaDashPluginTitle.value;
+			var ugotsta_dashplugin_mainfunction = ugotsta_dashplugin_prefix.toLowerCase() + '_dashboard_widget';
+			var ugotsta_dashplugin_addfunction = ugotsta_dashplugin_prefix.toLowerCase() + '_add_dashboard_widget';
+
+			var newline = "\r\n";
+			var tab = "\t";
+
+			var output = "<" + "?php" + newline + newline;
+			output += '/' + '*' + newline;
+			output += "Plugin Name:" + ugotsta_dashplugin_name + newline;
+			output += "Plugin URI:" + ugotsta_dashplugin_uri + newline;
+			output += "Description:" + ugotsta_dashplugin_description + newline;
+			output += "Version:" + ugotsta_dashplugin_version + newline;
+			output += "Author:" + ugotsta_dashplugin_author + newline;
+			output += "Author URI:" + ugotsta_dashplugin_authoruri + newline;
+			output += "License:" + ugotsta_dashplugin_license + newline;
+			output += '*' + '/' + newline + newline;
+
+			//now on to the code
+			output += "if (!class_exists ('" + ugotsta_dashplugin_class + "') ) {" + newline;
+			output += tab + "class " + ugotsta_dashplugin_class + " {" + newline;
+			output += tab + tab + "function " + ugotsta_dashplugin_mainfunction + "() {" + newline;
+			output += tab + tab + tab + ugotsta_dashplugin_content + newline;
+			output += tab + tab + "}" + newline;
+			output += newline;
+			output += tab + tab + "function " + ugotsta_dashplugin_addfunction + "() {" + newline;
+			output += tab + tab + tab + "wp_add_dashboard_widget( '" + ugotsta_dashplugin_id + "', '" + ugotsta_dashplugin_title + "', array( '" + ugotsta_dashplugin_class + "', '" + ugotsta_dashplugin_mainfunction + "') );" + newline;
+			output += tab + tab + "}" + newline;
+			output += tab + "}" + newline;
+			output += tab + "add_action( 'wp_dashboard_setup', array( '" + ugotsta_dashplugin_class + "', '" + ugotsta_dashplugin_addfunction + "') );" + newline;
+			output += "}" + newline;
+			output += "?" + ">";
+
+			//output the code
+			ugotstaDashPluginOutput.setValue(output);
+		}
+	</script>
+
+</head>
+
+<body>
+
+	<h3>Wordpress Dashboard Widget Plugin Maker</h3>
+	<p>
+		Create your own WordPress Dashboard Widget Plugin using the following form! Simply enter the requested data and press the <strong>Bake it!</strong> button. The code for your new dashboard widget will appear in the output section at the bottom of the
+		form!
+	</p>
+
+	<form name="ugotstaDashPlugin" class="ugotsta-form" id="ugotsta-plugin-maker-form">
+		<table border="0" cellspacing="0" cellpadding="0">
+			<h3>General Wordpress Plugin Information</h3>
+			<tr>
+				<td width="100%">
+					<label for="ugotstaDashPluginName">Plugin Name:</label>
+					<input type="text" name="ugotstaDashPluginName" id="ugotstaDashPluginName" size="40">
+				</td>
+			</tr>
+			<tr>
+				<td width="100%">
+					<label for="ugotstaDashPluginURI">Plugin URI:</label>
+					<input type="text" name="ugotstaDashPluginURI" id="ugotstaDashPluginURI" size="40">
+				</td>
+			</tr>
+			<tr>
+				<td width="100%">
+					<label for="ugotstaDashPluginDescription">Plugin Description:</label>
+					<textarea rows="12" cols="100" name="ugotstaDashPluginDescription" id="ugotstaDashPluginDescription"></textarea>
+				</td>
+			</tr>
+			<tr>
+				<td width="100%">
+					<label for="ugotstaDashPluginVersion">Plugin Version:</label>
+					<input type="text" name="ugotstaDashPluginVersion" id="ugotstaDashPluginVersion" size="10">
+				</td>
+			</tr>
+			<tr>
+				<td width="100%">
+					<label for="ugotstaDashPluginAuthor">Plugin Author:</label>
+					<input type="text" name="ugotstaDashPluginAuthor" id="ugotstaDashPluginAuthor" size="40">
+				</td>
+			</tr>
+			<tr>
+				<td width="100%">
+					<label for="ugotstaDashPluginAuthorURI">Plugin Author URL:</label>
+					<input type="text" name="ugotstaDashPluginAuthorURI" id="ugotstaDashPluginAuthorURI" size="40">
+				</td>
+			</tr>
+			<tr>
+				<td width="100%">
+					<label for="ugotstaDashPluginLicense">Plugin License:</label>
+					<input type="text" name="ugotstaDashPluginLicense" id="ugotstaDashPluginLicense" size="40">
+				</td>
+			</tr>
+			<tr>
+				<td width="100%">
+					<br/>
+					<h3>Dashboard Widget Content and Information</h3>
+					<label for="ugotstaDashPluginTitle">Dashboard Widget Title:</label>
+					<input type="text" name="ugotstaDashPluginTitle" id="ugotstaDashPluginTitle" size="40">
+				</td>
+			</tr>
+			<tr>
+				<td width="100%">
+					<label for="ugotstaDashPluginPrefix">Class Prefix:</label>
+					<input type="text" name="ugotstaDashPluginPrefix" id="ugotstaDashPluginPrefix" size="40">
+				</td>
+			</tr>
+			<tr>
+				<td width="100%">
+					<br/> Dashboard Widget Content:
+					<br/>
+					<div class="ugotsta-editor" id="ugotstaDashPluginContent"></div>
+					<script src="//rawgithub.com/ajaxorg/ace-builds/master/src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
+					<script>
+						var ugotstaDashPluginContent = ace.edit("ugotstaDashPluginContent");
+						//ugotstaDashPluginContent.setTheme("ace/theme/monokai");
+						ugotstaDashPluginContent.getSession().setMode("ace/mode/php");
+					</script>
+				</td>
+			</tr>
+			<tr>
+				<td width="100%">
+					<input type="button" value="Bake it!" onClick="ugotstaDashPluginBake()">
+				</td>
+			</tr>
+			<tr>
+				<td width="100%">
+					<br/>
+					<h3>Your Custom Dashboard Widget Plugin Code</h3> OUTPUT:
+					<br/>
+					<div class="ugotsta-editor" id="ugotstaDashPluginOutput"></div>
+					<script src="//rawgithub.com/ajaxorg/ace-builds/master/src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
+					<script>
+						var ugotstaDashPluginOutput = ace.edit("ugotstaDashPluginOutput");
+						ugotstaDashPluginOutput.getSession().setMode("ace/mode/php");
+					</script>
+					<br/>
+				</td>
+			</tr>
+		</table>
+	</form>
+
+	<h3>What Do I Do With This?</h3> To use the generated code, simply create a text file, paste the code into it and save it. Then, rename the file's extension to PHP and upload it to your plugin folder. You could also create a ZIP file, put the PHP file into it and use the Wordpress
+	Plugins > Add New > Upload option to upload it so you don't have to use FTP.
+
+
+</body>
+
+</html>

@@ -1,0 +1,41 @@
+<html>
+
+<head>
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        jQuery(document).ready(function() {
+            jQuery("#target").click(function() {
+                var input = prompt("Enter a string to jumble.");
+                alert(input.jumble());
+            });
+        });
+
+        function rnd(low, high) {
+            return Math.floor((Math.random() * high) + low);
+        }
+
+        String.prototype.jumble = function() {
+            var a = this.split("");
+            var result = "";
+            while (a.length > 0) {
+                //pick random element in a, add it to output, then remove it
+                result += a.splice(rnd(0, a.length), 1);
+            }
+            return result;
+        };
+    </script>
+
+</head>
+
+<body>
+
+    <h3>Title</h3>
+
+    <p>Information.</p>
+
+    <div id="target">Click here</div>
+
+</body>
+
+</html>

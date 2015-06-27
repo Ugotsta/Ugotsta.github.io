@@ -1,0 +1,83 @@
+<html>
+
+<head>
+
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+	<script language="JavaScript">
+		jQuery(document).ready(function() {
+			jQuery("#ugotstaContentToReplace").bind('change keyup paste blur focus click', function() {
+				jQuery("#ugotstaReplaceResults").val(ugotstaRegExpSearch());
+			});
+
+			jQuery("#ugotstaReplacePattern").bind('change keyup paste blur focus click', function() {
+				jQuery("#ugotstaReplaceResults").val(ugotstaRegExpSearch());
+			});
+
+			jQuery("#ugotstaReplaceWith").bind('change keyup paste blur focus click', function() {
+				jQuery("#ugotstaReplaceResults").val(ugotstaRegExpSearch());
+			});
+
+			function ugotstaRegExpSearch() {
+				var RegexpContent = jQuery("#ugotstaContentToReplace").val();
+				var RegexpReplacePattern = jQuery("#ugotstaReplacePattern").val();
+				var RegexpReplaceWith = jQuery("#ugotstaReplaceWith").val();
+				if (RegexpContent === '' || RegexpReplacePattern === '' || RegexpReplaceWith === '') {
+					return "";
+				}
+				else {
+					var Regexp = new RegExp(RegexpReplacePattern);
+					var RegexpResult = RegexpContent.replace(Regexp, RegexpReplaceWith);
+					if (RegexpResult) {
+						return RegexpResult;
+					}
+					else {
+						return "";
+					}
+				}
+			}
+		});
+	</script>
+
+</head>
+
+<body>
+
+	<h3>Regex Replace</h3>
+
+	<p>Use regular expressions to replace your pasted content according to your supplied regexp pattern. Simply paste in your content, your regular expression pattern and the string you'd like to replace it with. The results will be displayed below. </p>
+
+	<p>Please note, this is a javascript-based regular expression tool which may work differently from other programming languages like Perl, Java, etc.</p>
+
+	<form id="ugotstaRegexpReplaceForm" class="ugotsta-form">
+		<table>
+			<tr>
+				<td>
+					<label for="ugotstaContentToReplace">Content to replace</label>
+					<textarea rows="12" cols="100" name="ugotstaContentToReplace" id="ugotstaContentToReplace">Flip-Flop</textarea>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<label for="ugotstaReplacePattern">Regexp Replace pattern</label>
+					<input type="text" size="100" name="ugotstaReplacePattern" id="ugotstaReplacePattern" value="(\w+)-(\w+)" />
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<label for="ugotstaReplaceWith">Replace with</label>
+					<input type="text" size="100" name="ugotstaReplaceWith" id="ugotstaReplaceWith" value="$2-$1" />
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<label for="ugotstaReplaceResults">Replace results</label>
+					<textarea rows="12" cols="100" name="ugotstaReplaceResults" id="ugotstaReplaceResults" />Flop-Flip</textarea>
+					</p>
+				</td>
+			</tr>
+		</table>
+	</form>
+
+</body>
+
+</html>
