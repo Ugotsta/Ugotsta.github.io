@@ -1,0 +1,9 @@
+= Asciinema file creator
+
+Really simple, this form just takes sentences and paragraphs and converts them to a format that can be used with asciinema: https://asciinema.org/
+
+The purpose is simply to use asciinema to produce a typewriter effect of any given text. Just enter that text in the text area, press the button and it converts it to asciinema save format so you can copy-paste it in a file and play it.
+
+Here's the form: http://ugotsta.github.io/tools/asciinema-creator.html
+
+:hp-tags: asciinema, typewriter, terminal, console
