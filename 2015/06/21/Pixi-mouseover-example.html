@@ -4,28 +4,26 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
-    <title>Pixi mouseover example - Go Code!</title>
+    <title>Pixi mouseover example</title>
+    <meta name="description" content="" />
 
-    <meta name="HandheldFriendly" content="True">
-    <meta name="MobileOptimized" content="320">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <meta name="description" content="">
+    <link rel="shortcut icon" href="//Ugotsta.github.io/themes/ichi/favicon.ico">
 
-    <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="Pixi mouseover example">
-    <meta name="twitter:description" content="">
+    <script type="text/javascript" src="//Ugotsta.github.io/themes/ichi/assets/js/vendor/fastclick.js?v=1.0.0"></script>
+    <script type="text/javascript" src="//Ugotsta.github.io/themes/ichi/assets/js/vendor/modernizr.js?v=1.0.0"></script>
 
-    <meta property="og:type" content="article">
-    <meta property="og:title" content="Pixi mouseover example">
-    <meta property="og:description" content="">
 
-    <link href="/favicon.ico" rel="shortcut icon" type="image/x-icon">
-    <link href="/apple-touch-icon-precomposed.png" rel="apple-touch-icon">
-
-    <link rel="stylesheet" type="text/css" href="//Ugotsta.github.io/themes/uno/assets/css/uno.css?v=1.0.0" />
+    <link rel="stylesheet" type="text/css" href="//Ugotsta.github.io/themes/ichi/assets/css/normalize.css?v=1.0.0" />
+    <link rel="stylesheet" type="text/css" href="//Ugotsta.github.io/themes/ichi/assets/css/foundation.min.css?v=1.0.0" />
+    <!--[if lte IE 8]>
+        <link rel="stylesheet" type="text/css" href="//Ugotsta.github.io/themes/ichi/assets/css/outdatedBrowser.min.css?v=1.0.0">
+    <![endif]-->
+    <link rel="stylesheet" type="text/css" href="//Ugotsta.github.io/themes/ichi/assets/fonts/foundation-icons/foundation-icons.css?v=1.0.0" />
+    <link rel="stylesheet" type="text/css" href="//Ugotsta.github.io/themes/ichi/assets/css/styles.css?v=1.0.0" />
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans:300,700,400|Source+Sans+Pro:300,400,600,700,900,300italic,400italic,600italic,700italic,900italic" />
 
     <link rel="canonical" href="https://Ugotsta.github.io/2015/06/21/Pixi-mouseover-example.html" />
     
@@ -35,7 +33,7 @@
     <meta property="og:description" content="I recently starting playing around with pixi.js but had a tough time finding certain types of code examples. After some searching, I figured I should throw together some examples as I go, so here&amp;#8217;s the first. It&amp;..." />
     <meta property="og:url" content="https://Ugotsta.github.io/2015/06/21/Pixi-mouseover-example.html" />
     <meta property="article:published_time" content="2015-06-21T07:00:00.000Z" />
-    <meta property="article:modified_time" content="2015-06-27T06:33:15.818Z" />
+    <meta property="article:modified_time" content="2015-06-27T06:35:35.863Z" />
     <meta property="article:tag" content="pixi.js" />
     <meta property="article:tag" content="mouseover" />
     <meta property="article:tag" content="events" />
@@ -62,7 +60,7 @@
     "headline": "Pixi mouseover example",
     "url": "https://Ugotsta.github.io/2015/06/21/Pixi-mouseover-example.html",
     "datePublished": "2015-06-21T07:00:00.000Z",
-    "dateModified": "2015-06-27T06:33:15.818Z",
+    "dateModified": "2015-06-27T06:35:35.863Z",
     "keywords": "pixi.js,  mouseover,  events,  example,  demo",
     "description": "I recently starting playing around with pixi.js but had a tough time finding certain types of code examples. After some searching, I figured I should throw together some examples as I go, so here&amp;#8217;s the first. It&amp;..."
 }
@@ -71,108 +69,88 @@
     <meta name="generator" content="Ghost ?" />
     <link rel="alternate" type="application/rss+xml" title="Go Code!" href="https://Ugotsta.github.io/rss" />
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/default.min.css">
-
 </head>
-<body class="post-template tag-pixijs tag-mouseover tag-events tag-example tag-demo no-js">
+<body class="post-template tag-pixijs tag-mouseover tag-events tag-example tag-demo">
 
-    <span class="mobile btn-mobile-menu">
-        <i class="icon icon-list btn-mobile-menu__icon"></i>
-        <i class="icon icon-x-circle btn-mobile-close__icon hidden"></i>
-    </span>
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdate" href="http://outdatedbrowser.com/">Update my browser now</a></p>
+</div>
 
-    <header class="panel-cover panel-cover--collapsed " >
-      <div class="panel-main">
-    
-        <div class="panel-main__inner panel-inverted">
-        <div class="panel-main__content">
-    
-            <a href="https://Ugotsta.github.io" title="link to homepage for Go Code!"><img src="https://raw.githubusercontent.com/Ugotsta/Ugotsta.github.io/master/images/ugotsta-go.png" width="80" alt="Go Code! logo" class="panel-cover__logo logo" /></a>
-            <h1 class="panel-cover__title panel-title"><a href="https://Ugotsta.github.io" title="link to homepage for Go Code!">Go Code!</a></h1>
-            <hr class="panel-cover__divider" />
-            <p class="panel-cover__description">You go now!</p>
-            <hr class="panel-cover__divider panel-cover__divider--secondary" />
-    
-            <div class="navigation-wrapper">
-    
-              <nav class="cover-navigation cover-navigation--primary">
-                <ul class="navigation">
-                  <li class="navigation__item"><a href="https://Ugotsta.github.io/#blog" title="link to Go Code! blog" class="blog-button">Blog</a></li>
-                </ul>
-              </nav>
-    
-              
-              
-              <nav class="cover-navigation navigation--social">
-                <ul class="navigation">
-              
-              
-                  <!-- Twitter -->
-                  <li class="navigation__item">
-                    <a href="http://twitter.com/Ugotsta" title="Twitter account">
-                      <i class='icon icon-social-twitter'></i>
-                      <span class="label">Twitter</span>
-                    </a>
-                  </li>
-              
-                  <!-- Google Plus -->
-                  <li class="navigation__item">
-                    <a href="https://plus.google.com/108736472216123954449" title="Google+ account">
-                      <i class='icon icon-social-google-plus'></i>
-                      <span class="label">Google-plus</span>
-                    </a>
-                  </li>
-              
-                  <!-- Github -->
-                  <li class="navigation__item">
-                    <a href="http://github.com/Ugotsta" title="Github account">
-                      <i class='icon icon-social-github'></i>
-                      <span class="label">Github</span>
-                    </a>
-                  </li>
-                  </li>
-              
-              
-              
-              
-              
-                  <!-- Email -->
-                  <li class="navigation__item">
-                    <a href="mailto:ugotsta@gmail.com" title="Email ugotsta@gmail.com">
-                      <i class='icon icon-mail'></i>
-                      <span class="label">Email</span>
-                    </a>
-                  </li>
-              
-                </ul>
-              </nav>
-              
-    
+<nav class="top-bar hide-for-large-up" data-topbar >
+  <ul class="title-area">
+    <li class="name">
+
+    </li>
+    <li class="home"><a class="fi-home" href="https://Ugotsta.github.io"></a></li>
+    <li class="toggle-topbar"><a href="#" id="trigger-overlay" class="fi-list"></a></li>
+  </ul>
+
+<div class="overlay overlay-scale">
+    <button type="button" class="overlay-close">Close</button>
+    <nav>
+        <ul>
+            <li><a href="https://Ugotsta.github.io">Home</a></li>
+        </ul>
+    </nav>
+</div>
+
+</nav>
+
+<div class="row">
+
+<div class="small-16 medium-16 large-4 columns right head-area" >
+
+<header class="site-head">
+    <div class="vertical">
+        <div class="site-head-content inner">
+            <ul class="side-nav blog-menu show-for-large-up">
+                <li><a class="fi-home" href="https://Ugotsta.github.io"></a></li>
+                <li><a class="fi-torso" href="https://Ugotsta.github.io/about"></a></li>
+                <li><a class="fi-mail" href="https://Ugotsta.github.io/contact"></a></li>
+            </ul>
+            <a class="blog-logo" href="https://Ugotsta.github.io"><img alt="Go Code!" src="https://raw.githubusercontent.com/Ugotsta/Ugotsta.github.io/master/images/ugotsta-go.png" alt="Blog Logo" /></a>
+            <h1 class="blog-title">Go Code!</h1>
+            <hr>
+            <p class="blog-description">You go now!</p>
+            <div class="blog-network">
+<!--                 <a href="#" class="fi-social-pinterest"></a>
+                <a href="#" class="fi-social-linkedin"></a>
+                <a href="#" class="fi-social-behance"></a>
+                <a href="#" class="fi-social-deviant-art"></a>
+                <a href="#" class="fi-social-dribbble"></a>
+                <a href="#" class="fi-social-flickr"></a>
+                <a href="#" class="fi-social-github"></a>
+                <a href="#" class="fi-social-skype"></a>
+                <a href="#" class="fi-social-snapchat"></a>
+                <a href="#" class="fi-social-steam"></a>
+                <a href="#" class="fi-social-xbox"></a>
+                <a href="#" class="fi-social-reddit"></a> -->
+                  <a href="https://plus.google.com/108736472216123954449" class="fi-social-google-plus"></a>
+                  <a href="http://github.com/Ugotsta" class="fi-social-github"></a>
+                  <a href="http://twitter.com/Ugotsta" class="fi-social-twitter"></a>
             </div>
-    
-          </div>
-    
         </div>
+    </div>
+</header>
+
+</div>
+
+
+<div class="small-16 medium-16 large-12 columns main-column left">
     
-        <div class="panel-cover--overlay"></div>
-      </div>
-    </header>
 
-    <div class="content-wrapper">
-        <div class="content-wrapper__inner">
-            
+<main class="content" role="main">
 
-  <article class="post-container post-container--single">
+    <article class="post tag-pixijs tag-mouseover tag-events tag-example tag-demo">
 
-    <header class="post-header">
-      <div class="post-meta">
-        <time datetime="21 Jun 2015" class="post-meta__date date">21 Jun 2015</time> &#8226; <span class="post-meta__tags tags">on <a href="https://Ugotsta.github.io/tag/pixijs">pixi.js</a>, <a href="https://Ugotsta.github.io/tag/mouseover"> mouseover</a>, <a href="https://Ugotsta.github.io/tag/events"> events</a>, <a href="https://Ugotsta.github.io/tag/example"> example</a>, <a href="https://Ugotsta.github.io/tag/demo"> demo</a></span>
-        <span class="post-meta__author author"><img src="https://avatars.githubusercontent.com/u/532645?v=3" alt="profile image for Ugotsta.com" class="avatar post-meta__avatar" /> by Ugotsta.com</span>
-      </div>
-      <h1 class="post-title">Pixi mouseover example</h1>
-    </header>
 
-    <section class="post tag-pixijs tag-mouseover tag-events tag-example tag-demo">
-      <div class="paragraph">
+            <h1 class="post-title">Pixi mouseover example</h1>
+
+            <span class="post-meta label"><time datetime="2015-06-21">21 Jun 2015</time></span>
+
+            <section class="post-content">
+                <div class="paragraph">
 <p>I recently starting playing around with pixi.js but had a tough time finding certain types of code examples. After some searching, I figured I should throw together some examples as I go, so here&#8217;s the first. It&#8217;s an example of a simple mouseover effect. A circle starts with a 0.5 alpha value and when hovering over it with the mouse, it changes to alpha value of 1.</p>
 </div>
 <div class="paragraph">
@@ -187,36 +165,72 @@
 </div>
 <p data-height="268" data-theme-id="0" data-slug-hash="NqaLRV" data-default-tab="result" data-user="ugotsta" class='codepen'>See the Pen <a href='http://codepen.io/ugotsta/pen/NqaLRV/'>Pixi.js mouseover example</a> by David Mallonee (<a href='http://codepen.io/ugotsta'>@ugotsta</a>) on <a href='http://codepen.io'>CodePen</a>.</p>
 <script async src="//assets.codepen.io/assets/embed/ei.js"></script>
-    </section>
+                        <aside class="tags fi-pricetag-multiple">Posted on <a href="https://Ugotsta.github.io/tag/pixijs">pixi.js</a>, <a href="https://Ugotsta.github.io/tag/mouseover"> mouseover</a>, <a href="https://Ugotsta.github.io/tag/events"> events</a>, <a href="https://Ugotsta.github.io/tag/example"> example</a>, <a href="https://Ugotsta.github.io/tag/demo"> demo</a></aside>
+            </section>
+            <hr>
+            <footer class="post-footer">
 
-  </article>
+                <section class="share">
+                    <h4>Liked this post ? Share it.</h4>
+                    <a class="fi-social-facebook" href="https://www.facebook.com/sharer/sharer.php?u=https://Ugotsta.github.io/2015/06/21/Pixi-mouseover-example.html"
+                        onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                    </a>
+                    <a class="fi-social-twitter" href="https://twitter.com/share?text=Pixi%20mouseover%20example&amp;url=https://Ugotsta.github.io/2015/06/21/Pixi-mouseover-example.html"
+                        onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                    </a>
+                    <a class="fi-social-google-plus" href="https://plus.google.com/share?url=https://Ugotsta.github.io/2015/06/21/Pixi-mouseover-example.html"
+                       onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+                    </a>
+                </section>
 
-  
-  <section class="post-comments">
-    <div id="disqus_thread"></div>
-    <script type="text/javascript">
-        var disqus_shortname = 'ugotsta'; // required: replace example with your forum shortname
-        /* * * DON'T EDIT BELOW THIS LINE * * */
-        (function() {
+                <section class="author">
+                    <header>
+                        <span>About the author</span>
+                    </header>
+                    <section>
+                        <h4>Ugotsta.com</h4>
+                        <img src="https://avatars.githubusercontent.com/u/532645?v=3">
+                        <span>Los Angeles, CA</span>
+                        <a href="http://ugotsta.wordpress.com">http://ugotsta.wordpress.com</a>
+                    </section>
+                    <footer>
+                         <p></p>
+                    </footer>
+                </section>
+
+        <div class="clearfix"></div>
+                    <hr>
+
+            </footer>
+
+        <h3 class="title-disqus"><span class="fi-comments"></span>Discussions</h3>
+
+
+
+
+        <section class="post-comments">
+          <div id="disqus_thread"></div>
+          <script type="text/javascript">
+          var disqus_shortname = 'ugotsta'; // required: replace example with your forum shortname
+          /* * * DON'T EDIT BELOW THIS LINE * * */
+          (function() {
             var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
             dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
             (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-        })();
-    </script>
-    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-  </section>
-  
+          })();
+          </script>
+          <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+          <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+        </section>
 
 
+    </article>
 
-            <footer class="footer">
-                <span class="footer__copyright">&copy; 2015. All rights reserved.</span>
-                <span class="footer__copyright"><a href="http://uno.daleanthony.com" title="link to page for Uno Ghost theme">Uno theme</a> by <a href="http://daleanthony.com" title="link to website for Dale-Anthony">Dale-Anthony</a></span>
-                <span class="footer__copyright">Proudly published with <a href="http://hubpress.io" title="link to Hubpress website">Hubpress</a></span>
-            </footer>
-        </div>
-    </div>
+</main>
+
+</div>
+
+</div>
 
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js?v="></script> <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment-with-locales.min.js?v="></script> <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js?v="></script> 
       <script type="text/javascript">
@@ -231,8 +245,15 @@
         hljs.initHighlightingOnLoad();      
       </script>
 
-    <script type="text/javascript" src="//Ugotsta.github.io/themes/uno/assets/js/main.js?v=1.0.0"></script>
-    
+    <!--[if lte IE 8]>
+        <script type="text/javascript" src="//Ugotsta.github.io/themes/ichi/assets/js/outdatedBrowser.min.js?v=1.0.0"></script>
+    <![endif]-->
+    <script type="text/javascript" src="//Ugotsta.github.io/themes/ichi/assets/js/min/built.js?v=1.0.0"></script>
+
+    <script>
+      $(document).foundation();
+    </script>
+
     <script>
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -243,6 +264,5 @@
     ga('send', 'pageview');
 
     </script>
-
 </body>
 </html>
