@@ -1,0 +1,11 @@
+= Binary matrix effect in blue
+
+Continuing with my matrix experiments, this one's a bunch of 0's and 1's moving horizontally across the screen. Again done using pixi.js.
+
+Full-screen example: http://ugotsta.github.io/projects/pixi-0101-blue.html
+
+For the full-screen effect, use Google Chrome and press F11 for full-screen, then F5 to refresh.
+
+Here's the file in my repo: https://github.com/Ugotsta/Ugotsta.github.io/blob/master/projects/pixi-0101-blue.html
+
+:hp-tags: MATRIX, RAIN, CODE, PIXI, JS, JAVASCRIPT, BINARY, 0101
