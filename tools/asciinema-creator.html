@@ -1,28 +1,32 @@
+<!DOCTYPE HTML>
 <html>
 
 <head>
-	<link href="css/tools.css" rel="stylesheet" type="text/css">
+	<!-- <link href="css/tools.css" rel="stylesheet" type="text/css"> -->
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+	<script src="//code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+	<link rel="stylesheet" href="//code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
 	<script language="JavaScript">
-		// set delay for typing effect
-		var typeDelay = '0.040';
-		var terminalHeight = "100";
-		var terminalWidth = "25";
-		
 		// letse go!
 		jQuery(document).ready(function() {
 			jQuery('#ugotstaDoIt').click(function() {
 				ugotstaDoIt();
 			});
 
+			var br = "\r\n";
+			var tab = "  ";
+
 			function ugotstaDoIt() {
-				var br = "\r\n";
-				var tab = "  ";
+				// get terminal details
+				var terminal_width = Number(jQuery("#ugotsta-terminal-width").val());
+				var terminal_height = jQuery("#ugotsta-terminal-height").val();
+				var type_delay = jQuery("#ugotsta-type-delay").val();
+
 				// create initialization stuff
 				var result = '{' + br;
 				result += tab + '"version": 1,' + br;
-				result += tab + '"width": ' + terminalWidth + ',' + br;
-				result += tab + '"height": ' + terminalHeight + ',' + br;
+				result += tab + '"width": ' + terminal_width + ',' + br;
+				result += tab + '"height": ' + terminal_height + ',' + br;
 				result += tab + '"duration": 10,' + br;
 				result += tab + '"command": "/usr/bin/fish",' + br;
 				result += tab + '"title": "",' + br;
@@ -32,45 +36,115 @@
 				result += tab + '},' + br;
 				result += tab + '"stdout": [' + br;
 				// get the user's input
-				var content = jQuery("#ugotstaContentToReplace").val();
-				// first enter a string of line breaks to effectively clear screen
+				var content = jQuery("#ugotsta-content-to-replace").val();
+				// add a series of linebreaks to clear screen
 				for (var i = 0; i < 30; i++) {
-					result += tab + tab + '[' + br;
-					result += tab + tab + typeDelay + ',' + br;
-					result += tab + tab + '"' + '\\r\\n' + '"' + br;
-					result += tab + tab + '],';
+					result += writeChar(br, type_delay) + ",\n";
 				}
-				// iterate over each character to create output string
-				for (var i = 0; i < content.length; i++) {
-					result += tab + tab + '[' + br;
-					result += tab + tab + typeDelay + ',' + br;
-					// handle line breaks
-					if (content[i] == "\n") {
-						//result += "FOUNDS!";
-						result += tab + tab + '"' + '\\r\\n' + '"' + br;
-					} else {
-						result += tab + tab + '"' + content[i] + '"' + br;
+
+				// ready for main loop
+				var current_column = 0;
+				// parse the content
+				var items = parseContent(content);
+				// iterate over each item in parsed array
+				for (var i = 0; i < items.length; i++) {
+					var item = items[i];
+					// add line break and reset column if extends past terminal width
+					if (current_column + item.length > terminal_width) {
+						result += writeChar(br, type_delay) + ",\n";
+						current_column = 0;
 					}
-					result += tab + tab + '],';
+					// iterate over each char in item
+					for (var x = 0; x < item.length; x++) {
+						var char = item[x];
+						if (char == " " && current_column == 0) {
+							// do nothing
+						}
+						else {
+							result += writeChar(char, type_delay) + ",\n";
+							current_column++;
+							if (current_column >= terminal_width) {
+								current_column = 0;
+							}
+						}
+					}
 				}
-					result += tab + tab + '[' + br;
-					result += tab + tab + typeDelay + ',' + br;
-					result += tab + tab + '"' + '\\r\\n\\r\\n' + '"' + br;
-					result += tab + tab + ']';
+				// add a couple line breaks at the end
+				result += writeChar(br, type_delay) + ",\n";
+				result += writeChar(br, type_delay);
 				// add closing brackets
 				result += "]}";
 				// update result
 				jQuery("#ugotstaReplaceResults").val(result);
 			}
+
+			function writeChar(char, delay) {
+				var result = "";
+				// escape any line breaks
+				if (char == br || char == '\n') char = '\\r\\n';
+				// escape tabs
+				if (char == '\t') char = '\\t';
+				// write the requested characters
+				result += tab + tab + '[' + br;
+				result += tab + tab + delay + ',' + br;
+				if (char == '"') result += tab + tab + "'" + char + "'" + br;
+				else result += tab + tab + '"' + char + '"' + br;
+				result += tab + tab + ']';
+				return result;
+			}
+
+			// parses content into array of words
+			function parseContent(content) {
+				var result = [];
+				var word = "";
+				var is_word_started = false;
+				// iterate over each char in content
+				for (var i = 0; i < content.length; i++) {
+					if (is_word_started) {
+						// word has been started already, check if char is a letter
+						if (isLetter(content[i])) {
+							// another letter, add it to word
+							word += content[i];
+						}
+						else {
+							// not a letter, so lets end the word and add to array
+							result.push(word);
+							// and push current char
+							result.push(content[i]);
+							word = "";
+							is_word_started = false;
+						}
+					}
+					else {
+						// word not yet started, check if char is a letter
+						if (isLetter(content[i])) {
+							// found a letter, start new word
+							word = content[i];
+							is_word_started = true;
+						}
+						else {
+							// not a letter, push char into result
+							result.push(content[i]);
+						}
+					}
+				}
+				return result;
+			}
+
+			function isLetter(char) {
+				char = char.toUpperCase();
+				if (char.match(/^\w$/)) {
+					return true;
+				}
+				return false;
+			}
+
 		});
 	</script>
-
 </head>
 
 <body>
-
 	<h3>Asciinema file creator</h3>
-
 	<p>Easily create a text file for use with <a href="https://asciinema.org/" target="_blank">asciinema</a>. To use, simply do as follows:</p>
 	<ol>
 		<li>Enter text you'd like displayed using asciinema.</li>
@@ -78,21 +152,28 @@
 		<li>Create a blank file on your computer.</li>
 		<li>Copy-paste the resulting text into that file and save it.</li>
 	</ol>
-	
 	<p>You'll be able to execute that file like so "asciinema play yourfilename".</p>
-	
 	<form id="ugotstaRegexpReplaceForm" class="ugotsta-form">
 		<table>
 			<tr>
 				<td>
-					<label for="ugotstaContentToReplace">Text to make into asciinema file</label>
-					<textarea rows="12" cols="100" name="ugotstaContentToReplace" id="ugotstaContentToReplace">This is a test.</textarea>
+					<label for="ugotsta-content-to-replace">Text to make into asciinema file</label>
+					<textarea rows="12" cols="100" name="ugotsta-content-to-replace" id="ugotsta-content-to-replace">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</textarea>
+					<div data-role="collapsible">
+						<h3>More options</h3>
+						<label for="ugotsta-terminal-width">Terminal Width:</label>
+						<input type="range" name="ugotsta-terminal-width" id="ugotsta-terminal-width" value="66" min="0" max="200">
+						<label for="ugotsta-terminal-height">Terminal Height:</label>
+						<input type="range" name="ugotsta-terminal-height" id="ugotsta-terminal-height" value="18" min="0" max="100">
+						<label for="ugotsta-type-delay">Type delay (milliseconds):</label>
+						<input type="text" name="ugotsta-type-delay" id="ugotsta-type-delay" value="0.040">
+					</div>
 				</td>
 			</tr>
 			<tr>
 				<td>
 					<label for="ugotstaReplaceResults">Results</label>
-					<textarea rows="12" cols="100" name="ugotstaReplaceResults" id="ugotstaReplaceResults" /></textarea>
+					<textarea rows="12" cols="100" name="ugotstaReplaceResults" id="ugotstaReplaceResults" data-autogrow="false" /></textarea>
 					</p>
 				</td>
 			</tr>
@@ -103,7 +184,6 @@
 			</tr>
 		</table>
 	</form>
-
 </body>
 
 </html>
