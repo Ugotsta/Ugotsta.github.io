@@ -3,10 +3,11 @@
 
 <head>
 
-	<link href="css/tools.css" rel="stylesheet" type="text/css">
-	<link href='//fonts.googleapis.com/css?family=Electrolize' rel='stylesheet' type='text/css'>
-
+	<!-- <link href="css/tools.css" rel="stylesheet" type="text/css"> -->
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+	<script src="//code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+	<link rel="stylesheet" href="//code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+
 	<script type="text/javascript">
 		jQuery(document).ready(function() {
 			jQuery('#ugotstaBake').click(function() {
@@ -90,8 +91,8 @@
 				output += "?" + ">";
 
 				//output the code
-				//jQuery("#ugotstaWPC2PluginOutput").val(output);
-				ugotstaWPC2PluginOutput.setValue(output);
+				jQuery("#ugotstaWPC2PluginOutput").val(output);
+				//ugotstaWPC2PluginOutput.setValue(output);
 
 				//display some general instructions
 				var info = 'This is your new plugin code. Simply create a new file in your exported project folder.<br/><br/>Name that file as follows: <span class=".text-shadow">' + ugotsta_wpc2plugin_name_hyphenated + '.php</span><br/><br/>Paste the following code into that file and save it.';
@@ -120,8 +121,8 @@
 						RegexpResult = "";
 					}
 				}
-				//	jQuery("#ugotstaReplaceResults").val( RegexpResult );
-				ugotstaReplaceResults.setValue(RegexpResult);
+				jQuery("#ugotstaReplaceResults").val( RegexpResult );
+				//ugotstaReplaceResults.setValue(RegexpResult);
 			}
 
 		});
