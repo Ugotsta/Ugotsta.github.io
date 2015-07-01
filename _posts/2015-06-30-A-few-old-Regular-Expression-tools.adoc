@@ -1,0 +1,12 @@
+= A few, old Regular Expression tools
+
+I've had these lingering for ages now, a regex search and regex replace tool done using jQuery, as follows:
+
+http://ugotsta.github.io/tools/regex_search.html
+http://ugotsta.github.io/tools/regex_replace.html
+
+They're not at all recommended for real world use but simply as a helpful tool for those who would like a somewhat simple example of how a regex tool can be made using HTML and jQuery.
+
+I'd otherwise have to recommend the far superior https://regex101.com/
+
+:hp-tags: regex, regular expressions, regexp, html, jquery
