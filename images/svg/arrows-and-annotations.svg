@@ -171,6 +171,70 @@
          result="composite2"
          id="feComposite5487-4" />
     </filter>
+    <filter
+       style="color-interpolation-filters:sRGB"
+       inkscape:label="Drop Shadow"
+       id="filter5477-6-9">
+      <feFlood
+         flood-opacity="0.341176"
+         flood-color="rgb(0,0,0)"
+         result="flood"
+         id="feFlood5479-8-1" />
+      <feComposite
+         in="flood"
+         in2="SourceGraphic"
+         operator="in"
+         result="composite1"
+         id="feComposite5481-8-5" />
+      <feGaussianBlur
+         in="composite1"
+         stdDeviation="3"
+         result="blur"
+         id="feGaussianBlur5483-3-3" />
+      <feOffset
+         dx="4"
+         dy="4"
+         result="offset"
+         id="feOffset5485-0-4" />
+      <feComposite
+         in="SourceGraphic"
+         in2="offset"
+         operator="over"
+         result="composite2"
+         id="feComposite5487-4-7" />
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB"
+       inkscape:label="Drop Shadow"
+       id="filter5477-6-2">
+      <feFlood
+         flood-opacity="0.341176"
+         flood-color="rgb(0,0,0)"
+         result="flood"
+         id="feFlood5479-8-5" />
+      <feComposite
+         in="flood"
+         in2="SourceGraphic"
+         operator="in"
+         result="composite1"
+         id="feComposite5481-8-8" />
+      <feGaussianBlur
+         in="composite1"
+         stdDeviation="3"
+         result="blur"
+         id="feGaussianBlur5483-3-5" />
+      <feOffset
+         dx="4"
+         dy="4"
+         result="offset"
+         id="feOffset5485-0-5" />
+      <feComposite
+         in="SourceGraphic"
+         in2="offset"
+         operator="over"
+         result="composite2"
+         id="feComposite5487-4-2" />
+    </filter>
   </defs>
   <sodipodi:namedview
      id="base"
@@ -179,9 +243,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.45254834"
-     inkscape:cx="583.11458"
-     inkscape:cy="313.6368"
+     inkscape:zoom="0.64"
+     inkscape:cx="644.08546"
+     inkscape:cy="355.60948"
      inkscape:current-layer="layer1"
      inkscape:document-units="px"
      showgrid="false"
@@ -198,7 +262,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -314,7 +378,7 @@
          id="tspan7615"
          x="798.25421"
          y="666.87097"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:45px;font-family:'Indie Flower';-inkscape-font-specification:'Indie Flower'">Lorem ipsum</tspan></text>
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:45px;font-family:'Indie Flower';-inkscape-font-specification:'Indie Flower'">Straight arrow</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#ff0000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;filter:url(#filter5477-6)"
@@ -326,7 +390,7 @@
          id="tspan7615-5"
          x="976.93274"
          y="856.45062"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:45px;font-family:'Indie Flower';-inkscape-font-specification:'Indie Flower'">Ipsum Lorem</tspan></text>
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:45px;font-family:'Indie Flower';-inkscape-font-specification:'Indie Flower'">Curved arrow</tspan></text>
     <rect
        style="opacity:0.894;fill:#ff0000;fill-opacity:0.62745098;stroke:#ff0000;stroke-width:4.23070145;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;"
        id="rect7812"
@@ -337,8 +401,33 @@
        transform="matrix(1.0012877,0,0,0.9997443,-0.04467898,0.2116706)" />
     <path
        style="opacity:1;fill:#000000;fill-opacity:1;stroke:#ffffff;stroke-width:4;stroke-linecap:square;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;filter:url(#filter5477-6)"
-       d="m 308.16679,865.06371 0.008,73.60941 16.51069,-13.0661 14.28609,37.46544 11.46509,-4.37174 -14.28609,-37.46557 21.03125,-1.2491 -49.01632,-54.92234 z"
+       d="m 308.16679,865.06371 0.008,73.60941 16.51069,-13.0661 14.28609,37.46544 11.46509,-4.37174 -14.28609,-37.46557 21.03125,-1.2491 z"
        id="rect6871"
-       inkscape:connector-curvature="0" />
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cccccccc" />
+    <path
+       style="opacity:1;fill:#ff0000;fill-opacity:1;stroke:#ffffff;stroke-width:4;stroke-linecap:square;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;filter:url(#filter5477-6-9)"
+       d="m 832.86011,907.92761 0.008,73.6095 16.51069,-13.0661 33.24547,185.77349 c 21.24393,-15.3989 46.76869,-18.1534 59.52016,-16.1285 l -81.30054,-174.01689 21.03125,-1.2491 z"
+       id="rect6871-7"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cccccccc"
+       transform="matrix(0.60806974,-0.79388361,0.79388361,0.60806974,-551.82742,1013.7162)" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#ff0000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;filter:url(#filter5477-6-2)"
+       x="947.08252"
+       y="1006.0854"
+       id="text7613-8-2"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan7615-5-4"
+         x="947.08252"
+         y="1006.0854"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:45px;font-family:'Indie Flower';-inkscape-font-specification:'Indie Flower';fill:#ff0000">Fancy custom</tspan><tspan
+         sodipodi:role="line"
+         x="947.08252"
+         y="1062.3354"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:45px;font-family:'Indie Flower';-inkscape-font-specification:'Indie Flower';fill:#ff0000"
+         id="tspan4465">arrow</tspan></text>
   </g>
 </svg>
