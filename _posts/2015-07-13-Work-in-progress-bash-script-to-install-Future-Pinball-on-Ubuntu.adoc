@@ -1,0 +1,9 @@
+= Work-in-progress bash script to install Future Pinball on Ubuntu
+
+I've been toiling at this bash script to simplify the process of installing and playing Future Pinball on Ubuntu, via WINE. Currently, it's a bit complicated to install, given that Future Pinball is designed solely for Windows. :)
+
+Fortunately, some helpful guys have helped make it possible for others to get it up and running on Linux. I'm just hoping to make the process a little easier.
+
+Here's the script: https://gist.github.com/Ugotsta/fa9551aa799218a2f508
+
+:hp-tags: future pinball, ubuntu, linux, wine
