@@ -1,0 +1,9 @@
+= Another impress.js plugin for WordPress
+
+So I decided to create this plugin idea I had in mind years ago when impress.js was first released. This one is a WordPress plugin that provides shortcodes to easily use impress.js within WordPress, using the visual editor.
+
+Here's the project: https://github.com/Ugotsta/impress-for-wordpress
+
+It needs more testing still but it works great in my limited testing thus far. Instructions are at the above address and I'll try and post a video walkthrough for it soon.
+
+:hp-tags: imress.js, javascript, presentations, wordpress, visual editor, shortcode
