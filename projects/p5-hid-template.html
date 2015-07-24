@@ -100,6 +100,7 @@
                 s.push();
 
                 /* CHARRED GRASS */
+                var text_x = -100, text_y = 500;
                 s.rotate(-0.19);
                 s.fill(0, 0, 0, 255);
                 s.noStroke();
@@ -110,14 +111,14 @@
                 for (var i = 0; i < 400; i++) {
                     str += chars[s.rand(0, chars.length)];
                 }
-                s.text(str, -100, 450);
+                s.text(str, text_x, text_y);
 
                 // other random characters
                 s.noStroke();
                 for (var i = 0; i < 20; i++) {
                     s.textSize(s.rand(10, lowMid / 3));
                     s.fill(0, 0, 0, s.rand(20, 200));
-                    s.text(chars[s.rand(0, chars.length)], s.rand(-100, s.width), 450);
+                    s.text(chars[s.rand(0, chars.length)], s.rand(text_x, s.width), text_y);
                 }
                 s.pop();
 
@@ -145,16 +146,16 @@
                 }
                 // reverse string if past higher threshold
                 if (level > 0.3) text = text.split('').reverse().join('');
-                s.text(text, 50, 500);
+                s.text(text, text_x + 150, text_y + 50);
 
                 // reset transforms
                 s.translate(+bass_translate / 4, +bass_translate);
                 s.scale(1 - (bass / 255) / 5);
+                s.rotate(+0.17);
 
                 /* TRACK DETAILS */
                 s.scale();
                 s.translate();
-                s.rotate(+0.17);
                 s.stroke(0, 0, 0, 100);
                 s.strokeWeight(2);
                 s.fill(0);
