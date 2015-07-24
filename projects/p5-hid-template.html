@@ -66,6 +66,13 @@
                 s.background(0);
             }
 
+            s.mousePressed = function() {
+                if (s.mouseX > 0 && s.mouseX < 100 && s.mouseY > 0 && s.mouseY < 100) {
+                    var fs = s.fullscreen();
+                    s.fullscreen(!fs);
+                }
+            }
+
             s.draw = function() {
                 var level = amp.getLevel();
                 freq = fft.analyze();
@@ -89,7 +96,7 @@
                 s.image(grad1, -200, -600);
 
                 s.pop();
-                
+
                 s.push();
 
                 /* CHARRED GRASS */
@@ -103,22 +110,22 @@
                 for (var i = 0; i < 400; i++) {
                     str += chars[s.rand(0, chars.length)];
                 }
-                s.text(str, -100,450);
-                
+                s.text(str, -100, 450);
+
                 // other random characters
                 s.noStroke();
-                for (var i = 0; i < 20; i++){
+                for (var i = 0; i < 20; i++) {
                     s.textSize(s.rand(10, lowMid / 3));
                     s.fill(0, 0, 0, s.rand(20, 200));
                     s.text(chars[s.rand(0, chars.length)], s.rand(-100, s.width), 450);
                 }
                 s.pop();
-                
+
                 /* TEXT */
                 s.fill(0, 0, 0, 230);
                 s.scale(1 + (bass / 255) / 5);
                 var bass_translate = (bass / 255) * 150;
-                s.translate(-bass_translate / 4, -bass_translate);
+                s.translate(-bass_translate / 3, -bass_translate);
                 s.rotate(-0.17);
                 s.textSize(100);
                 s.noStroke();
@@ -173,8 +180,8 @@
                     s.text(sound.created_at, x, y);
                 // label name or tags
                 y += lineheight;
-                if(sound.label_name) s.text(sound.label_name, x, y);
-                    else s.text(sound.tag_list, x, y);
+                if (sound.label_name) s.text(sound.label_name, x, y);
+                else s.text(sound.tag_list, x, y);
                 // permalink
                 s.textSize(16);
                 y += lineheight * 2;
@@ -194,7 +201,7 @@
 
                 /* SPECTRUM */
                 s.translate(50, 50);
-                s.scale(0.86, 0.1);
+                s.scale(0.92, 0.1);
                 s.noStroke();
                 s.rotate(0);
                 s.tint(0, 0, 0, 40);
