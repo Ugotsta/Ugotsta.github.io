@@ -1,0 +1,13 @@
+= Music visualization for Hidden in Darkness using P5.js
+
+Finally got this posted, a music visualization done using P5.js for my upcoming "Hidden in Darkness" project:
+
+http://ugotsta.github.io/projects/p5-hid-template.html
+
+More info about that project here: http://hid.ugotsta.com/
+
+Thanks to this guy for the SoundCloud connection code: https://www.facebook.com/rybotronic/photos/a.976210555739878.1073741846.123804924313783/976210582406542/
+
+While it's relatively straight-forward to connect to SoundCloud's API, that existing code made it much quicker.
+
+:hp-tags: p5.js, music visualization, soundcloud api, hid, hidden in darkness
