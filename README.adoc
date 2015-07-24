@@ -4,4 +4,9 @@ Very simple, this repo exists to serve project pages such as various JavaScript 
 
 The repo itself is forked from HubPress, which provides the blogging features. Check it out if you haven't already.
 
-I've posted a video guide about it here: https://www.youtube.com/watch?v=-gLCX9THFX0
+I've posted a video guide about it as well.
+
+[<img src="http://img.youtube.com/vi/<insert-youtube-video-id-here>/maxresdefault.jpg">](https://www.youtube.com/watch?v=-gLCX9THFX0)
+
+
+
