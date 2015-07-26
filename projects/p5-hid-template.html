@@ -49,6 +49,7 @@
             };
             
             s.text_clean = function(t) {
+                if(!t) return " ";
                 if(t.length > 30)
                     t = t.substring(0, 29) + " ...";
                 return t.toString();
