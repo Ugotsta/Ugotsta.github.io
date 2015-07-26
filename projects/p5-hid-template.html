@@ -11,7 +11,6 @@
         var p5sc_instance;
         var sound;
         var client_id = 'ea6d4c6a6f367767516c9221a30c2ced';
-        var txt = "Hidden in Darkness";
         
         // from here: http://stackoverflow.com/questions/11582512/how-to-get-url-parameters-with-javascript/11582513#11582513
         function getURLParameter(name) {
@@ -19,6 +18,8 @@
         }
         var url = getURLParameter('url');
         if (!url) url = 'https://soundcloud.com/ugotsta/those-are-not-goblins';
+        var txt = getURLParameter('txt');
+        if (!txt) txt = 'Hidden in Darkness';
         
         var p5sc = function(s) {
             
@@ -59,7 +60,7 @@
                 var level = amp.getLevel();
                 freq = fft.analyze();
                 
-                x_scale = 0.85; // 85% of s.width
+                x_scale = 0.95; // 85% of s.width
                 y_scale = 0.33; // 33% of x.height
                 x = (s.width - (s.width * x_scale)) / 2;
                 y = (s.height - (s.height * y_scale)) + s.height * (y_scale / 4);
@@ -138,8 +139,9 @@
             };
 
             s.draw_details = function() {
-                var padding = 14;
-                x = y = padding;
+                //var padding = 28;
+                x = (s.width - (s.width * x_scale)) / 2;
+                y = x;
                 var artwork_size = 100 + 10; // 10 pixels for padding
                 var lineheight = 30;
 
@@ -169,7 +171,8 @@
                 s.text(s.text_clean(sound.label_name), x, y);
                 
                 // right-side
-                x = s.width - padding;
+                x = s.width - ((s.width - (s.width * x_scale)) / 2);
+                //x = s.width - padding;
                 y = lineheight * 2;
                 s.textSize(30);
                 s.textAlign(s.RIGHT);
