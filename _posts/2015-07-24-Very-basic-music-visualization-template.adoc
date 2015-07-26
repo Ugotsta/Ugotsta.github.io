@@ -1,0 +1,11 @@
+= Very basic music visualization template
+
+After the previous release of my "Hidden in Darkness" music visualization using p5.js, I realized it just doesn't look at all good in a YouTube video given the size of the elements. So I've started with a more basic template mimicing Monstercat's styling completely, to start with.
+
+Here's the result: http://ugotsta.github.io/projects/p5-music-template-basic.html
+
+I also realized a great way to make this more accessible is to accept a url parameter so you can add ?url= then the url of any soundcloud track and it'll visualize that track.
+
+This is totally basic at the moment, dead simple with just a spectrum analyzer, no background graphics. But it's got the more important bits and effects can easily be added.
+
+:hp-tags: javascript, music visualization, p5.js, processing, template, monstercat
