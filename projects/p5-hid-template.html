@@ -17,7 +17,7 @@
             return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search) || [, ""])[1].replace(/\+/g, '%20')) || null
         }
         var url = getURLParameter('url');
-        if (!url) url = 'https://soundcloud.com/ugotsta/those-are-not-goblins';
+        if (!url) url = 'https://soundcloud.com/ugotsta/the-buzzing';
         var txt = getURLParameter('txt');
         if (!txt) txt = 'Hidden in Darkness';
         
@@ -50,9 +50,15 @@
             };
             
             s.text_clean = function(t) {
+                // truncate lengthy strings
                 if(!t) return " ";
-                if(t.length > 30)
-                    t = t.substring(0, 29) + " ...";
+                if(t.length > 30) {
+                    var str = t.substring(0, 30);
+                    for(var i = t.length; i >= 0; i--) {
+                        if(t[i] === " ") return t.substring(0, i) + "...";
+                    }
+                    return t.substring(0, 29) + "...";
+                }
                 return t.toString();
             };
             
@@ -178,7 +184,8 @@
                 s.textAlign(s.RIGHT);
                 s.text(s.text_clean(sound.created_at), x, y);
                 y += lineheight;
-                s.text(s.text_clean(sound.tag_list), x, y);
+                var tag_list = sound.tag_list.replace(/['"]+/g, '');
+                s.text(s.text_clean(tag_list), x, y);
                 s.textAlign(s.LEFT);
                 
                 // also available: sound.created_at, sound.label_name, sound.permalink_url, sound.tag_list
