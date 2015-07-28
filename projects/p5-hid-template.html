@@ -39,6 +39,7 @@
                 canvas = s.createCanvas(s.windowWidth, s.windowHeight);
                 if (sound.artwork_url) thumbnail = s.loadImage(sound.artwork_url);
                 else thumbnail = "";
+                
                 amp = new p5.Amplitude(.25);
                 fft = new p5.FFT(.1, 64);
                 
@@ -65,6 +66,7 @@
             };
             
             s.init = function() {
+                
                 s.background(0);
                 x_scale = 0.95; // 75% of s.width
                 y_scale = 0.4; // 45% of x.height
@@ -80,13 +82,9 @@
                     for (var y = 0; y < gradient.height; y++) {
                         var a = s.map(y, 0, gradient.height, 240, 100);
                         var c = s.map(y, 0, gradient.height, 230, 0);
-                        if (y > gradient.height * 0.5) c -= s.map(y, 0, gradient.height, 0, 1);
-                        if (y > gradient.height * 0.65) c -= s.map(y, 0, gradient.height, 0, 1);
-                        if (y > gradient.height * 0.75) c -= s.map(y, 0, gradient.height, 0, 1);
-                        if (y > gradient.height * 0.8) c -= s.map(y, 0, gradient.height, 0, 1);
-                        if (y > gradient.height * 0.85) c -= s.map(y, 0, gradient.height, 0, 1);
-                        if (y > gradient.height * 0.9) c -= s.map(y, 0, gradient.height, 0, 1);
-                        if (y > gradient.height * 0.95) c -= s.map(y, 0, gradient.height, 0, 1);
+                        for(i = 0.5; i <= 0.95; i += 0.5){
+                            if (y > gradient.height * i) c -= s.map(y, 0, gradient.height, 0, 1);
+                        }
                         gradient.set(x, y, [c, c, c, a]);
                     }
                 }
@@ -94,7 +92,7 @@
             };
             
             s.draw = function() {
-                var level = amp.getLevel();
+                
                 freq = fft.analyze();
                 
                 /* BACKGROUND */
@@ -124,6 +122,8 @@
             };
             
             s.drawSpectrum = function() {
+                var volume = amp.getLevel();
+                
                 // spectrum
                 s.noStroke();
                 s.fill(0, 0, 0, 255);
@@ -151,7 +151,7 @@
                 
                 // reverse string if past higher threshold
                 var txt = text;
-                if (amp.getLevel() > 250) txt = txt.split('').reverse().join('');
+                if (volume > 0.2) txt = text.split('').reverse().join('');
                 
                 s.noStroke();
                 s.textFont('Nothing You Could Do');
@@ -181,15 +181,21 @@
                     // set size
                     s.textSize(text_size - s.map(lvl, 0, 255, 0, text_size));
                     
-                    //s.fill(0, 0, 0, 255 - lvl / 2);
-                    s.fill(0);
+                    //set color
+                    var c = lvl;
                     
-                // randomize stroke a bit    
-                s.stroke(0, 0, 0, s.random(0, 150));
-                s.strokeWeight(s.random(0, 2));
+                    //set alpha
+                    var alpha = 255 - lvl;
+                    
+                    s.fill(c, c, c, alpha);
+                    
+                    // randomize stroke a bit    
+                    s.stroke(c, c, c, s.random(0, alpha));
+                    s.strokeWeight(s.random(0, 3));
                     
                     // draw letter
                     s.text(letter, x_pos, spectrum_y);
+                    
                     // reset transforms
                     s.pop();
                     
