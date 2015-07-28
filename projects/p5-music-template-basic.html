@@ -47,6 +47,19 @@
                 s.fullscreen(!fs);
             }
             
+            s.textFilter = function(t) {
+                // truncate lengthy strings
+                if(!t) return " ";
+                if(t.length > 30) {
+                    var str = t.substring(0, 30);
+                    for(var i = str.length; i >= 0; i--) {
+                        if(str[i] === " ") return str.substring(0, i) + " ...";
+                    }
+                    return t.substring(0, 29) + " ...";
+                }
+                return t.toString();
+            };
+            
             s.draw = function() {
                 var level = amp.getLevel();
                 freq = fft.analyze();

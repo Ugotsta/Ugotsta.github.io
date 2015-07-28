@@ -114,12 +114,6 @@
                 s.image(gradient, 0, 0);
                 
                 s.fill(0);
-                // random line
-                s.stroke(0, 0, 0, s.random(0, 30 + highMid / 2));
-                var random_x = s.random(0, s.width);
-                s.line(random_x, 0, random_x, s.height);
-                // darkness
-                s.noStroke();
                 s.rect(0, spectrum_y, s.width, s.height);
             };
             
@@ -156,7 +150,7 @@
                 s.noStroke();
                 s.textFont('Nothing You Could Do');
                 
-                // map letters of string to frequency bands
+                // map letter of string to a frequency band
                 for (var i = 0; i < txt.length; i++) {
                     s.push();
                     var letter = txt[i];
@@ -165,10 +159,7 @@
                     
                     var from = band * l + 1;
                     var to = from + l;
-                    var adj = 1;
-                    if (i == 0) adj = 0.75;
-                    lvl = fft.getEnergy(from, to) * adj;
-                    
+                    var lvl = fft.getEnergy(from, to);
                     // randomly change to uppercase based on level
                     if (lvl > 100) {
                         if (Math.random() > 0.9) letter = letter.toUpperCase();
@@ -177,18 +168,13 @@
                     var x = s.random(0, 2);
                     x = Math.random() > 0.5 ? x : -x;
                     s.translate(x, -lvl_translate);
-                    
-                    // set size
+                    var rotation = s.map(lvl, 0, 255, 0, 2);
+                    //s.rotate(rotation);
                     s.textSize(text_size - s.map(lvl, 0, 255, 0, text_size));
                     
                     //s.fill(0, 0, 0, 255 - lvl / 2);
                     s.fill(0);
                     
-                // randomize stroke a bit    
-                s.stroke(0, 0, 0, s.random(0, 150));
-                s.strokeWeight(s.random(0, 2));
-                    
-                    // draw letter
                     s.text(letter, x_pos, spectrum_y);
                     // reset transforms
                     s.pop();
@@ -196,7 +182,7 @@
                 }
                 
                 /* CHARRED GRASS */
-                grass_size = 100;
+                grass_size = 80;
                 s.fill(0, 0, 0, 255);
                 s.noStroke();
                 s.textSize(grass_size);
@@ -207,11 +193,7 @@
                     var random = s.random(0, chars.length);
                     str += chars[Math.floor(random)];
                 }
-                s.text(str, 0, spectrum_y + grass_size / 4);
-                // smaller grass
-                s.textSize(grass_size / 2);
-                str = str.split('').reverse().join('');
-                s.text(str, 0, spectrum_y + grass_size / 6);
+                s.text(str, 0, spectrum_y + grass_size / 4 + 2);
                 
                 // SCRATCHES
                 s.push();

@@ -23,7 +23,7 @@
             var canvas;
             var thumbnail;
             var freq;
-            var x, y, x_scale, y_scale, spectrum_width, spectrum_height;
+            var spectrum_x, spectrum_y, x_scale, y_scale, spectrum_width, spectrum_height;
             
             s.preload = function() {
                 s.background(0);
@@ -41,6 +41,19 @@
                 song.play();
             }
             
+            s.textFilter = function(t) {
+                // truncate lengthy strings
+                if(!t) return " ";
+                if(t.length > 30) {
+                    var str = t.substring(0, 30);
+                    for(var i = str.length; i >= 0; i--) {
+                        if(str[i] === " ") return str.substring(0, i) + " ...";
+                    }
+                    return t.substring(0, 29) + " ...";
+                }
+                return t.toString();
+            };
+            
             s.mousePressed = function() {
                 var fs = s.fullscreen();
                 s.fullscreen(!fs);
@@ -51,26 +64,26 @@
                 freq = fft.analyze();
                 
                 /* BACKGROUND */
-                s.draw_background();
+                s.drawBackground();
                 
                 /* SPECTRUM */
-                s.draw_spectrum();
+                s.drawSpectrum();
 
                 /* TRACK DETAILS */
-                s.draw_details();
+                s.drawDetails();
             }
             
-            s.draw_background = function() {
+            s.drawBackground = function() {
                 s.background(0);
                 x_scale = 0.75; // 75% of s.width
                 y_scale = 0.33; // 33% of x.height
-                x = (s.width - (s.width * x_scale)) / 2;
-                y = (s.height - (s.height * y_scale)) / 1.5;
-                spectrum_width = s.width * x_scale;
-                spectrum_height = (s.height * y_scale) / 1.25;
+                spectrum_x = (s.windowWidth - (s.windowWidth * x_scale)) / 2;
+                spectrum_y = (s.windowHeight - (s.windowHeight * y_scale)) / 1.5;
+                spectrum_width = s.windowWidth * x_scale;
+                spectrum_height = (s.windowHeight * y_scale) / 1.25;
             }
             
-            s.draw_spectrum = function() {
+            s.drawSpectrum = function() {
                 s.noStroke();
                 s.fill(255);
                 
@@ -78,7 +91,7 @@
                 var l = 17000 / bands; // width per band, max frequency of 17000
                 var margin = 4;
                 for (var i = 0; i < bands; i += 1) {
-                    var x_pos = s.map(i, 0, bands, x, x + spectrum_width);
+                    var x_pos = s.map(i, 0, bands, spectrum_x, spectrum_x + spectrum_width);
                     var h = -(spectrum_height) + s.map((function() {
                         var from = i * l + 1;
                         var to = from + l;
@@ -88,25 +101,24 @@
                         if(i == 1) adj = 0.75;
                         return fft.getEnergy(from, to) * adj;
                     })(), 0, 255, spectrum_height, 0);
-                    s.rect(x_pos, y, (spectrum_width / bands) - margin, h);
+                    s.rect(x_pos, spectrum_y, (spectrum_width / bands) - margin, h);
                 }
             }
             
-            s.draw_details = function() {
-                y += 14; // padding 14 pixels
+            s.drawDetails = function() {
+                
+                var y = spectrum_y + 14; // padding 14 pixels
+                var x = spectrum_x;
                 var artwork_size = 100 + 10; // 10 pixels for padding
                 var lineheight = 30;
                 
                 s.fill(255);
                 s.textFont('Open Sans');
                 
-                // thumbnail - set blend mode to show white as transparent
-                //s.blendMode(s.MULTIPLY);
                 if (thumbnail !== "") {
                     s.image(thumbnail, x, y);
                     x += artwork_size;
                 }
-                //s.blendMode(s.BLEND);
                 
                 // author
                 s.stroke(255);
@@ -114,20 +126,20 @@
                 s.textSize(50);
                 s.textLeading(30);
                 y += lineheight + 24;
-                s.text(sound.user.username.toUpperCase(), x, y);
+                s.text(s.textFilter(sound.user.username).toUpperCase(), x, y);
                 
                 // title
                 s.noStroke();
                 y += lineheight;
                 s.textSize(30);
-                s.text(sound.title.toUpperCase(), x, y);
+                s.text(s.textFilter(sound.title).toUpperCase(), x, y);
                 // also available: sound.created_at, sound.label_name, sound.permalink_url, sound.tag_list
                 // https://developers.soundcloud.com/docs/api/reference#tracks
             }
             
             s.windowResized = function() {
                 s.resizeCanvas(s.windowWidth, s.windowHeight);
-                s.draw_background();
+                s.drawBackground();
             }
         };
         
