@@ -1,0 +1,10 @@
+= A little PHP function for getting signed integers from a string
+
+I've been working on an update to my Impress for WordPres plugin and needed a way to accept signed integers as values added after particular effect strings such as "rotate-45", "scale+2" or "slide-up-500".
+
+So here's the function I created for it:
+https://gist.github.com/Ugotsta/7f0ac5d4b536598ae541
+
+Hope someone finds it helpful, I certainly have since there are multiple other projects I can use this for.
+
+:hp-tags: php, signed integer, get numbers from string
