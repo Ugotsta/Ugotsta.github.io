@@ -17,7 +17,7 @@
             return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search) || [, ""])[1].replace(/\+/g, '%20')) || null
         }
         var url = getURLParameter('url');
-        if (!url) url = 'https://soundcloud.com/ugotsta/what-i-want';
+        if (!url) url = 'https://soundcloud.com/ugotsta/those-are-not-goblins';
         var text = getURLParameter('text');
         if (!text) text = '';
         
@@ -124,14 +124,14 @@
             s.drawSpectrum = function() {
                 var volume = amp.getLevel();
                 
-                // spectrum
+                /* SPECTRUM */
                 s.noStroke();
-                s.fill(0, 0, 0, 255);
                 
                 var bands = 64;
                 var l = 17000 / bands; // width per band, max frequency of 17000
                 var margin = 4;
                 for (var i = 0; i < bands; i += 1) {
+                    s.fill(0, 0, 0, 255);
                     var x_pos = s.map(i, 0, bands, spectrum_x, spectrum_x + spectrum_width);
                     var h = -(spectrum_height) + s.map((function() {
                         var from = i * l + 1;
@@ -144,6 +144,9 @@
                     })(), 0, 255, spectrum_height, 0);
                     // draw band
                     s.rect(x_pos, spectrum_y, (spectrum_width / bands) - margin, h);
+                    // draw line at top
+                    s.fill(255, 255, 255, s.map(h, 0, -spectrum_height, 0, 150));
+                    s.rect(x_pos, spectrum_y + h, (spectrum_width / bands) - margin, 1);
                 }
                 
                 /* "Hidden in Darkness" */
@@ -166,8 +169,8 @@
                     var from = band * l + 1;
                     var to = from + l;
                     var adj = 1;
-                    if (i == 0) adj = 0.75;
-                    lvl = fft.getEnergy(from, to) * adj;
+                    //if (i == 0) adj = 0.75;
+                    var lvl = fft.getEnergy(from, to) * adj;
                     
                     // randomly change to uppercase based on level
                     if (lvl > 100) {
@@ -179,14 +182,13 @@
                     s.translate(x, -lvl_translate);
                     
                     // set size
-                    s.textSize(text_size - s.map(lvl, 0, 255, 0, text_size));
+                    var interp = s.map(lvl, 0, 255, text_size, 0);
+                    if (lvl > 75) interp = s.map(lvl, 0, 255, text_size / 2, 0);
+                    s.textSize(interp);
                     
-                    //set color
-                    var c = lvl;
-                    
-                    //set alpha
-                    var alpha = 255 - lvl;
-                    
+                    //setup fill
+                    var c = 0;//lvl
+                    var alpha = 255 - lvl * 2;
                     s.fill(c, c, c, alpha);
                     
                     // randomize stroke a bit    
@@ -194,7 +196,8 @@
                     s.strokeWeight(s.random(0, 3));
                     
                     // draw letter
-                    s.text(letter, x_pos, spectrum_y);
+                    s.textAlign(s.CENTER);
+                    s.text(letter, x_pos + text_size / 2, spectrum_y);
                     
                     // reset transforms
                     s.pop();
