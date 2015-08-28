@@ -8,4 +8,4 @@ Here's a work-in-progress script I've been using to record Milkdrop visualizatio
 
 I've used MSI Afterburner for the recordings but tried to leave open the possibility of using other screen recorders by including some options at the start of the script.
 
-hb-tags: music visualization, winamp, milkdrop, recording, msi afterburner
+hp-tags: music visualization, winamp, milkdrop, recording, msi afterburner
