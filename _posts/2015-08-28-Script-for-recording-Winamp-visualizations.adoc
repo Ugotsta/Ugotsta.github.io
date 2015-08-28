@@ -1,0 +1,12 @@
+= Script for recording Winamp visualizations
+
+Here's a work-in-progress script I've been using to record Milkdrop visualizations in Winamp.
+
+++++
+<script src="https://gist.github.com/Ugotsta/57b385a44039460159c7.js"></script>
+https://gist.github.com/Ugotsta/57b385a44039460159c7
+++++
+
+I've used MSI Afterburner for the recordings but tried to leave open the possibility of using other screen recorders by including some options at the start of the script.
+
+hb-tags: music visualization, winamp, milkdrop, recording, msi afterburner
