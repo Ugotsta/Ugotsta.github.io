@@ -1,0 +1,14 @@
+= AutoIt3 script to seamlessly loop videos
+
+This is sort of a followup to my post about Winamp visualization recording. This companion script can take those recorded videos and loop them seamlessly.
+
+Here's the gist:
+++++
+<script src="https://gist.github.com/Ugotsta/3496a2706e71dd46e538.js"></script>
+++++
+
+Basically, the script just makes 2 copies of the video file, and merges them at midpoint with a transition.
+
+As noted in the gist, MLT is required, it's totally free. And better yet, you can easily install Shotcut and it'll use the MLT file included with that.
+
+:hp-tags: autoit, seamless video, transitions, melt framework, shotcut
