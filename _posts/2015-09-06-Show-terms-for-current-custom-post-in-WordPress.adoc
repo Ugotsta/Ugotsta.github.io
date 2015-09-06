@@ -1,0 +1,9 @@
+= Show terms for current custom post in WordPress
+
+Here's a relatively simple snippet I needed for a friend's site. It will automatically display all the taxonomy terms for all registered, front-end taxonomies, for the currently viewed post. It will only display terms if there are any added to the post.
+
+++++
+<script src="https://gist.github.com/Ugotsta/f88f9c83cbb1ee5746fa.js"></script>
+++++
+
+:hp-tags: wordpress, display taxonomy terms, show terms for current post,
