@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/webfont/1/webfont.js"></script>
+    <script src="js/Tone.min.js"></script>
+    <link href='css/gist-glitchy-text.css' rel='stylesheet' type='text/css'>
+    <script>
+        jQuery(document).ready(function() {
+
+            // from here: http://stackoverflow.com/questions/11582512/how-to-get-url-parameters-with-javascript/11582513#11582513
+            function getURLParameter(name) {
+                return decodeURIComponent((new RegExp('[?|&]' + name +
+                '=' + '([^&;]+?)(&|#|;|$)').exec(location.search) ||
+                [, ""])[1].replace(/\+/g, '%20')) || null;
+            }
+
+            // get the url parameters
+            var gist = getURLParameter('gist');
+            if (!gist) gist = '706d6817066cb72dba8d';
+            var filename = getURLParameter('filename');
+            var delay = getURLParameter('delay');
+            if (!delay) delay = 50;
+            var font = getURLParameter('font');
+            if (!font) font = 'Cutive Mono';
+
+            // Load Google font.
+            WebFont.load({
+                google: {
+                    families: [font]
+                }
+            });
+
+            var newline = "\r\n";
+            var tab = "\t";
+            var queued = [];
+            
+            var freeverb = new Tone.Freeverb({
+                "roomSize" : 1,
+                "dampening": 1000,
+            }).toMaster();
+            var osc = new Tone.Oscillator({
+            			"frequency" : 440,
+            			"volume" : -30,
+            		}).connect(freeverb);
+            
+            // Wild frequency sound
+            window.setInterval(function() {
+                osc.frequency.value = Math.floor( ( Math.random() * 14000 ) + 2000 );
+            }, 100);
+            
+            // interval for rendering of text and cursor
+            window.setInterval(function() {
+                if (queued.length !== 0) {
+                    $('#cursor').remove();
+                    queued[0] = queued[0].replace(/\t/g, '&nbsp;&nbsp;&nbsp;&nbsp;');
+                    queued[0] = queued[0].replace(/\n|\r\n|\r/g, '<br/>');
+                    $('#message').append(queued[0]);
+                    $('#message').append('<span id="cursor">_</span>');
+                    queued.shift();
+                }
+                else {
+                    $('#cursor').hide('slow');
+                }
+            }, delay);
+            
+            // We'll store the letters to be rendered in a queue, used above
+            function queue_letters(str) {
+                for (var i = 0; i < str.length; i++) {
+                    queued.push(str[i]);
+                }
+            }
+            
+            function render(content) {
+                osc.start();
+                $('#message').text('');
+                $('#message').css({
+                    "font-family": font,
+                    "font-size": "30px"
+                });
+                speechSynthesis.cancel();
+                var msg = new SpeechSynthesisUtterance();
+                var words = content.replace(/([ .,-;]+)/g, '$1§sep§').split('§sep§');
+                var count = 0;
+                msg.text = content;
+                msg.lang = 'en-UK';
+                msg.rate = 1;
+                msg.onboundary = function(event) {
+                    queue_letters(words[count]);
+                    count++;
+                }
+                console.log(msg);
+                speechSynthesis.speak(msg);
+            }
+
+            http: //stackoverflow.com/questions/9005572/pull-in-json-data/10454873#10454873
+                $.ajax({
+                    url: 'https://api.github.com/gists/' + gist,
+                    type: 'GET',
+                    dataType: 'jsonp'
+                }).success(function(gistdata) {
+                    var objects = [];
+                    if (!filename) {
+                        for (var file in gistdata.data.files) {
+                            if (gistdata.data.files.hasOwnProperty(file)) {
+                                var o = gistdata.data.files[file].content;
+                                if (o) {
+                                    objects.push(o);
+                                }
+                            }
+                        }
+                    }
+                    else {
+                        objects.push(gistdata.data.files[filename].content);
+                    }
+                    render(objects[0]);
+                }).error(function(e) {
+                    console.log('Error on ajax return.');
+                });
+        });
+    </script>
+
+    <body>
+        <div id='scanlines'></div>
+        <div id='message'>Loading ... please wait.</div>
+    </body>
+
+</html>

@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <script>
+    function dump(obj) {
+      var result = '';
+      for (var i in obj) {
+        result += i + ": " + obj[i] + "\n";
+      }
+      return result;
+    }
+
+    function displayURLParameters() {
+      var query_string = location.search;
+
+      var html = document.createElement('pre');
+      html.innerHTML = dump(query_string);
+      document.body.appendChild(html);
+    }
+  </script>
+
+  <body onload="displayURLParameters();">Works</body>
+
+</html>

@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+  <script>
+    jQuery(document).ready(function() {
+
+      // from here: http://stackoverflow.com/questions/11582512/how-to-get-url-parameters-with-javascript/11582513#11582513
+      function getURLParameter(name) {
+        return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search) || [, ""])[1].replace(/\+/g, '%20')) || null
+      }
+
+      // get the url parameters
+      var gist = getURLParameter('gist');
+      if (!gist) gist = 'f9b5e1e9f47343cc16b6';
+      // TODO: Create a gist with Markdown that explains this script.
+      var filename = getURLParameter('filename');
+
+      function DoSomethingWith(content) {
+        var result = '';
+        for (var i = 0; i < content.length; i++) {
+          result += content[i];
+        }
+        $('#message').text(result);
+      }
+
+      // http://stackoverflow.com/questions/9005572/pull-in-json-data/10454873#10454873
+      $.ajax({
+        url: 'https://api.github.com/gists/' + gist,
+        type: 'GET',
+        dataType: 'jsonp'
+      }).success(function(gistdata) {
+        var objects = [];
+        if (!filename) {
+          for (var file in gistdata.data.files) {
+            if (gistdata.data.files.hasOwnProperty(file)) {
+              var o = gistdata.data.files[file].content;
+              if (o) {
+                objects.push(o);
+              }
+            }
+          }
+        }
+        else {
+          objects.push(gistdata.data.files[filename].content);
+        }
+        DoSomethingWith(objects[0]);
+      }).error(function(e) {
+        console.log('Error on ajax return.');
+      });
+
+    });
+  </script>
+
+  <body>
+    <div id='message'>Nothing just yet!</div>
+  </body>
+
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+	<script src="//code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+	<link rel="stylesheet" href="//code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+	<script language="JavaScript">
+	
+		jQuery(document).ready(function() {
+			jQuery("#ugotstaContentToSearch").bind('change keyup paste blur focus click', function() {
+				jQuery("#ugotstaSearchResults").val(ugotstaRegExpSearch());
+			});
+			jQuery("#ugotstaSearchPattern").bind('change keyup paste blur focus click', function() {
+				jQuery("#ugotstaSearchResults").val(ugotstaRegExpSearch());
+			});
+
+			function ugotstaRegExpSearch() {
+				var counter = 0;
+				var result = '';
+				var total = 0;
+				var RegexpContent = jQuery("#ugotstaContentToSearch").val();
+				
+				var content = RegexpContent.split("\n");
+				for (var i = 0; i < content.length; i++ ) {
+					var values = content[i].split ( ',' );
+					result += values[ 2 ] + ',';
+					result += values[ 3 ] + ',';
+					result += values[ 4 ] + ',';
+					result += values[ 8 ];
+					result += "\n";
+				}
+				
+				return result;
+			}
+		});
+		
+	</script>
+
+</head>
+
+<body>
+
+	<div id="ugotsta-tools">
+		<h3>Regex Search</h3>
+
+		<p>Search your pasted content using the regular expression you provide. Enter the content to search and your RegExp search pattern then the resulting index (position) of the search will be displayed below.</p>
+
+		<form id="ugotstaWordCounter">
+			<table>
+				<tr>
+					<td>
+						<label for="ugotstaContentToSearch">Content to operate on</label>
+						<textarea rows="12" cols="100" name="ugotstaContentToSearch" id="ugotstaContentToSearch"></textarea>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label for="ugotstaSearchPattern">Optional parameter</label>
+						<input type="text" size="100" name="ugotstaSearchPattern" id="ugotstaSearchPattern">
+						</textarea>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label for="ugotstaSearchResults">Results</label>
+						<textarea rows="12" cols="100" name="ugotstaSearchResults" id="ugotstaSearchResults"></textarea>
+						</p>
+					</td>
+				</tr>
+			</table>
+		</form>
+	</div>
+
+</body>
+
+</html>

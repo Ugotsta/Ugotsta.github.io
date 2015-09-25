@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<!-- Terminal Blackjack -->
+<html lang="en-us">
+
+<head>
+    <meta charset="utf-8">
+    <title>Terminal Blackjack</title>
+</head>
+<html>
+
+<head>
+    <link href="css/terminal.css" rel="stylesheet" type="text/css">
+    <script src="js/terminal.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            
+            // $( "#terminal" ).terminalize({
+            //     color: '#ff0000',
+            // });
+
+            // create terminal
+            var terminal = new Terminal();
+            terminal.log('Terminal style Blackjack v0.1');
+            terminal.br();
+            terminal.log('Source code: <a href="https://c9.io/ugotsta/terminal_blackjack" target="_blank">https://c9.io/ugotsta/terminal_blackjack</a>');
+            terminal.br();
+            var player;
+            newGame();
+
+            function Card(s, n) {
+                var number = n;
+                var suit = s;
+                //getters
+                this.getNumber = function() {
+                    return number;
+                };
+                this.getSuit = function() {
+                    return suit;
+                };
+                this.getValue = function() {
+                    if (number === 1) {
+                        return 11;
+                    }
+                    else if (number >= 10) {
+                        return 10;
+                    }
+                    return number;
+                };
+            }
+
+            function Hand() {
+                var cards = [deal(), deal()];
+                this.getCards = function() {
+                        return cards;
+                    },
+                    this.score = function() {
+                        var sum = 0;
+                        for (var i = 0; i < cards.length; i++) {
+                            var value = cards[i].getValue();
+                            if (value === 11) {
+                                if (sum + value > 21) {
+                                    sum += 1;
+                                }
+                                else {
+                                    sum += value;
+                                }
+                            }
+                            else {
+                                sum += value;
+                            }
+                        }
+                        return sum;
+                    },
+                    this.printHand = function() {
+                        var suits = ["spades", "clubs", "diamonds", "hearts"];
+                        var result = "";
+                        for (var i = 0; i < cards.length; i++) {
+                            var face = cards[i].getNumber();
+                            if (face === 11) {
+                                face = "Jack";
+                            }
+                            else if (face === 12) {
+                                face = "Queen";
+                            }
+                            else if (face === 13) {
+                                face = "King";
+                            }
+                            else if (face === 1) {
+                                face = "Ace";
+                            }
+                            result += face;
+                            result += " of ";
+                            result += suits[cards[i].getSuit() - 1];
+                            result += i < (cards.length - 1) ? " | " : "";
+                        }
+                        return result;
+                    },
+                    this.hitMe = function() {
+                        cards.push(deal());
+                    };
+            }
+
+            function deal() {
+                var randNum = Math.floor(Math.random() * 13) + 1;
+                var randSuit = Math.floor(Math.random() * 4) + 1;
+                //the card
+                return new Card(randSuit, randNum);
+            }
+
+            function playAsDealer() {
+                var dealer = new Hand();
+                while (dealer.score() < 17) {
+                    dealer.hitMe();
+                }
+                return dealer;
+            }
+
+            function playAsUser() {
+                terminal.log("Your hand: " + player.printHand());
+                terminal.br();
+                terminal.log("Score: " + player.score());
+                terminal.br(2);
+                terminal.confirm("Press SPACE/ENTER to Hit, any other key to Pass: ", playerCallback);
+            }
+
+            function playerCallback(choice) {
+                if (choice === 32 || choice === 13) {
+                    player.hitMe();
+                    if (player.score() > 21) {
+                        continuePlay();
+                    }
+                    else {
+                        playAsUser();
+                    }
+                }
+                else {
+                    continuePlay();
+                }
+            }
+
+            function continuePlay() {
+                var dealer = playAsDealer();
+                var result = declareWinner(player, dealer);
+                terminal.br(2);
+                terminal.log("Your score: " + player.score());
+                terminal.br();
+                terminal.log("Dealer score: " + dealer.score());
+                terminal.br(2);
+                terminal.log(result);
+                terminal.br();
+                terminal.log("------------------------------");
+                terminal.br(2);
+                newGame();
+            }
+
+            function declareWinner(userHand, dealerHand) {
+                var user = userHand.score();
+                var dealer = dealerHand.score();
+                if (user === dealer || (user > 21 && dealer > 21)) {
+                    return "You tied!";
+                }
+                else if (dealer > 21) {
+                    return "You win!";
+                }
+                else if (user > 21) {
+                    return "You lose!";
+                }
+                else if (user > dealer) {
+                    return "You win!";
+                }
+                else if (dealer > user) {
+                    return "You lose!";
+                }
+            }
+
+            function newGame() {
+                terminal.br();
+                terminal.log("New game started.");
+                terminal.br();
+                player = new Hand();
+                playAsUser();
+            }
+        });
+    </script>
+</head>
+
+<body>
+    <div id="terminal" class="reverse"></div>
+</body>
+
+</html>
