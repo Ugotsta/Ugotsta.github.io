@@ -86,8 +86,8 @@
                     counter += 1;
                     
                     // Start fade-in near counter limit.
-                    if (counter > counter_limit - 255) {
-                        fade_alpha -= 1;
+                    if (counter > counter_limit - 85) {
+                        fade_alpha -= 3;
                     }
                     if (counter == counter_limit) {
                         song.play();
