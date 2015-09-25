@@ -64,6 +64,11 @@
             };
             
             s.init = function() {
+                
+                // Go full-screen
+                var fs = s.fullscreen();
+                s.fullscreen(!fs);
+                
                 s.background(0);
                 x_scale = 0.95; // 75% of s.width
                 y_scale = 0.4; // 45% of x.height
