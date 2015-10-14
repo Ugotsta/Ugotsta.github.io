@@ -1,0 +1,10 @@
+= Chapters plugin for WordPress
+
+There are a few plugins that provide chapter separations within WordPress, but nothing that fit the purpose I needed here: http://unlimitedfiction.com/stories/
+
+So I set about creating one, here's the result:
+https://github.com/Ugotsta/chapters-for-wordpress
+
+Using a simple [chapter] shortcode, users can add chapter separations in their content. Usually, shortcodes like this need to wrap around content like HTML tags. I hated the thought of users needing to ensure closing [/chapter] tags were added though. So this one tracks the number of shortcode occurrences and ensures the chapters are automatically wrapped with divs instead. An important usability concern in my opinion.
+
+hp-tags:wordpress,plugin,chapters,chapter-list
