@@ -1,0 +1,7 @@
+= Nibble game source code released
+
+I've finally gotten around to releasing the code for my now aged Nibble/Nibble2 project.
+
+Here's the new project page: http://ugotsta.github.io/nibble/
+
+:hp-tags: construct 2,javascript,open-source,release
