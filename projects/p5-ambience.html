@@ -12,7 +12,7 @@
             var sound;
             var client_id = 'ea6d4c6a6f367767516c9221a30c2ced';
             var counter = 0;
-            var counter_limit = 500;
+            var counter_limit = 50;
             var fade_alpha = 255;
 
             function getURLParameter(name) {
@@ -164,11 +164,8 @@
                     s.textLeading(tsize_author);
                     y += artwork_size / 2.5;
                     s.textFont('Gruppo');
-                    //s.textFont('Yanone Kaffeesatz');
-                    //s.text(s.textFilter(sound.title), x, y);
-                    s.text('AMBIENCE - ambience.ugotsta.com', x, y);
-
-                    //s.fill(254, 122, 22, 255);
+                    s.text(s.textFilter(sound.user.username), x, y);
+                    
                     s.fill(135, 199, 225, 255);
 
                     // title
