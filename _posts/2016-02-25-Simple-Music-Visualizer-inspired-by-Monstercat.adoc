@@ -10,7 +10,11 @@ https://github.com/Ugotsta/Ugotsta.github.io/blob/master/projects/p5-ambience.ht
 
 Pure HTML and JavaScript relying on the excellent P5.js library.
 
+Oh and I released this video, it composites 2 videos, one recorded from APEXvj, the other from this visualizer.
+
+video::z699hciybA0[youtube]
+
 Let me know what ya think! :)
 
 
-:hp-tags:soundcloud,visualization,monstercat
+:hp-tags: soundcloud,visualization,monstercat
