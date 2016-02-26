@@ -1,0 +1,16 @@
+= Simple Music Visualizer inspired by Monstercat
+
+So here's a revised version of my basic music visualizer:
+http://ugotsta.github.io/projects/p5-ambience?url=https://soundcloud.com/ugotsta/dreaming-of-dreams
+
+You can replace the url at the end with any SoundCloud url to visualize any audio from SoundCloud.
+
+Meanwhile, here's all the code composing it:
+https://github.com/Ugotsta/Ugotsta.github.io/blob/master/projects/p5-ambience.html
+
+Pure HTML and JavaScript relying on the excellent P5.js library.
+
+Let me know what ya think! :)
+
+
+:hp-tags:soundcloud,visualization,monstercat
