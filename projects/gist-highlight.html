@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <style>
+        body {
+            white-space: pre-line;
+            font-family: 'PT Mono', monospace;
+        }
+    </style>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.5.0/styles/default.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.5.0/highlight.min.js"></script>
+    <script>
+        hljs.initHighlightingOnLoad();
+        jQuery(document).ready(function() {
+
+            // from here: http://stackoverflow.com/questions/11582512/how-to-get-url-parameters-with-javascript/11582513#11582513
+            function getURLParameter(name) {
+                return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search) || [, ""])[1].replace(/\+/g, '%20')) || null
+            }
+
+            // get the url parameters
+            var gist = getURLParameter('gist');
+            if (!gist) gist = '9aa95e7c12fd48e9b9f8';
+            var filename = getURLParameter('filename');
+
+            // get CSS
+            var css = getURLParameter('css');
+            if (!css) css = '1fca8332dd34ccfc0eba084deb023962';
+            var cssfilename = getURLParameter('cssfilename');
+
+            function render(content) {
+                var result = '';
+                for (var i = 0; i < content.length; i++) {
+                    if (content[i] == "\n") {
+                        result += "\r\n";
+                    }
+                    else {
+                        result += content[i];
+                    }
+                }
+                // syntax highlight code
+                $('div#code').text(result);
+                $('div#code').each(function(i, block) {
+                    hljs.highlightBlock(block);
+                });
+                // copy code bg color to body bg
+                $('body').css('background', $('div#code').css('background'));
+            }
+
+            function rendercss(content) {
+                // add css to head
+                $('head').append('<style/>' + content + '</style>');
+            }
+
+            // http://stackoverflow.com/questions/9005572/pull-in-json-data/10454873#10454873
+            $.ajax({
+                url: 'https://api.github.com/gists/' + gist,
+                type: 'GET',
+                dataType: 'jsonp'
+            }).success(function(gistdata) {
+                var objects = [];
+                if (!filename) {
+                    for (var file in gistdata.data.files) {
+                        if (gistdata.data.files.hasOwnProperty(file)) {
+                            var o = gistdata.data.files[file].content;
+                            if (o) {
+                                objects.push(o);
+                            }
+                        }
+                    }
+                }
+                else {
+                    objects.push(gistdata.data.files[filename].content);
+                }
+                render(objects[0]);
+            }).error(function(e) {
+                console.log('Error on ajax return.');
+            });
+
+            $.ajax({
+                url: 'https://api.github.com/gists/' + css,
+                type: 'GET',
+                dataType: 'jsonp'
+            }).success(function(gistdata) {
+                var objects = [];
+                if (!cssfilename) {
+                    for (var file in gistdata.data.files) {
+                        if (gistdata.data.files.hasOwnProperty(file)) {
+                            var o = gistdata.data.files[file].content;
+                            if (o) {
+                                objects.push(o);
+                            }
+                        }
+                    }
+                }
+                else {
+                    objects.push(gistdata.data.files[cssfilename].content);
+                }
+                rendercss(objects[0]);
+            }).error(function(e) {
+                console.log('Error on ajax return.');
+            });
+
+        });
+    </script>
+</head>
+
+<body>
+    <div id="outer">
+        <div id="inner">
+            <div id='code'>Nothing just yet!</div>
+        </div>
+    </div>
+</body>
+
+</html>
