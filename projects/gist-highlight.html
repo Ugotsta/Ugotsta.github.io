@@ -5,7 +5,6 @@
     <meta charset="utf-8">
     <title>Code Glorifier</title>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.5.0/styles/default.min.css">
     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.5.0/highlight.min.js"></script>
     <script>
         hljs.initHighlightingOnLoad();
@@ -16,15 +15,22 @@
                 return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search) || [, ""])[1].replace(/\+/g, '%20')) || null
             }
 
-            // get the url parameters
+            // get gist url parameters
             var gist = getURLParameter('gist');
             if (!gist) gist = '9aa95e7c12fd48e9b9f8';
             var filename = getURLParameter('filename');
 
-            // get CSS
+            // get css parameters
             var css = getURLParameter('css');
             if (!css) css = '1fca8332dd34ccfc0eba084deb023962';
             var cssfilename = getURLParameter('cssfilename');
+            
+            // get style if provided
+            var style = getURLParameter('style');
+            if (!style) style = 'default';
+            // add style reference to head to load the style
+            $('head').append('<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.5.0/styles/' + style + '.min.css">');
+            // <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.5.0/styles/default.min.css">
 
             function render(content) {
                 var result = '';
@@ -47,9 +53,7 @@
 
             function rendercss(content) {
                 // add css to head
-                result = '<style>' + content + '</style>';
-                $('head').append(result);
-                //$('head').append('<meta test="true"/>'); 
+                $('head').append('<style>' + content + '</style>');
             }
 
             // http://stackoverflow.com/questions/9005572/pull-in-json-data/10454873#10454873
