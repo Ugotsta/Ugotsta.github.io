@@ -2,13 +2,9 @@
 <html lang="en">
 
 <head>
+    <meta charset="utf-8">
+    <title>Code Glorifier</title>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-    <style>
-        body {
-            white-space: pre-line;
-            font-family: 'PT Mono', monospace;
-        }
-    </style>
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.5.0/styles/default.min.css">
     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.5.0/highlight.min.js"></script>
     <script>
@@ -51,7 +47,9 @@
 
             function rendercss(content) {
                 // add css to head
-                $('head').append('<style/>' + content + '</style>');
+                result = '<style>' + content + '</style>';
+                $('head').append(result);
+                //$('head').append('<meta test="true"/>'); 
             }
 
             // http://stackoverflow.com/questions/9005572/pull-in-json-data/10454873#10454873
