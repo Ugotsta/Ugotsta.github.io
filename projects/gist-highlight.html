@@ -30,20 +30,10 @@
             if (!style) style = 'default';
             // add style reference to head to load the style
             $('head').append('<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.5.0/styles/' + style + '.min.css">');
-            // <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.5.0/styles/default.min.css">
 
             function render(content) {
-                var result = '';
-                for (var i = 0; i < content.length; i++) {
-                    if (content[i] == "\n") {
-                        result += "\r\n";
-                    }
-                    else {
-                        result += content[i];
-                    }
-                }
                 // syntax highlight code
-                $('div#code').text(result);
+                $('div#code').text(content);
                 $('div#code').each(function(i, block) {
                     hljs.highlightBlock(block);
                 });
@@ -112,7 +102,7 @@
 <body>
     <div id="outer">
         <div id="inner">
-            <div id='code'>Nothing just yet!</div>
+            <div id='code'><pre><code>Nothing just yet!</code></pre></div>
         </div>
     </div>
 </body>
