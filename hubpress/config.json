@@ -1,1 +1,10 @@
-{"meta":{"username":"Ugotsta","repositoryName":"Ugotsta.github.io","branch":"master"},"site":{"title":"Go Code!","description":"You go now!","logo":"https://raw.githubusercontent.com/Ugotsta/Ugotsta.github.io/master/images/ugotsta-go.png","googleAnalytics":"UA-64562838-1","disqus":"ugotsta","url":"https://Ugotsta.github.io"},"socialnetwork":{"email":"ugotsta@gmail.com","twitter":"http://twitter.com/Ugotsta","googleplus":"https://plus.google.com/108736472216123954449","github":"http://github.com/Ugotsta"},"theme":{"name":"ichi","url":"//Ugotsta.github.io/themes/ichi"}}
+{
+  "meta": {
+    "username": "put your username here",
+    "repositoryName": "put your repository name here",
+    "branch": "master"
+  },
+  "theme": {
+    "name": "Casper"
+  }
+}
