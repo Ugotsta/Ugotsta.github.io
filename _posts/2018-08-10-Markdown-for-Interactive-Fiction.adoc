@@ -3,18 +3,20 @@
 While I haven't updated this site in a long time, I've been very busy adding and updating projects here at GitHub. One of the projects is an attempt at refining the idea of creating interactive fiction using Markdown. I stumbled on the idea while learning Markdown after realizing Markdown flavors like GitHub Markdown automatically create local links from headings and you could create links in the same document to those headings. That's roughly all an old-school, CYOA (Choose-your-own-adventure) story would need.
 
 Initial investigations into the idea lead me here:
-link: https://github.com/rudism/Ficdown[]
+https://github.com/rudism/Ficdown[]
 
 That's a brilliant implementation. However, I thought it would be nice if a story file could read and function exactly like a regular Markdown document. What if, in its simplest form, you could create a story using typical Markdown with no more instructions needed other than Markdown syntax? GitHub's Markdown takes care of that by default.
 
-Check it out: link: https://gist.github.com/Ugotsta/eb48e3ccd0e0fc6a502a8ebe02a38715[Await]
+Check it out: https://gist.github.com/Ugotsta/eb48e3ccd0e0fc6a502a8ebe02a38715[Await]
 
 Nothing more than regular Markdown is needed for that. A user can simply click through the links in the document to navigate through the story. Now, what if we wanted to add conditional stuff? Well, since whatever method we chose to use would require changes to the Markdown spec, why not just use Markdown code blocks to add programming features? Code blocks would be rendered as code when reading such documents. Or they could be hidden using HTML comment tags.
 
 == Enter GitDown
 
-My project link: https://github.com/ugotsta/gitdown/#GitDown[GitDown] is a simple Markdown renderer that adds a few helpers, implemented using Markdown code blocks. Spefically, it checks for the existence of special codes within code tags and acts on them. And that's the core idea driving all the sub-apps I'm building with GitDown.
+My project https://github.com/ugotsta/gitdown/#GitDown[GitDown] is a simple Markdown renderer that adds a few helpers, implemented using Markdown code blocks. Spefically, it checks for the existence of special codes within code tags and acts on them. Those codes could be used to render randomized or other dynamic content. They provide everything needed for interactive storytelling through Markdown.
 
 I'm still building the core out so I don't have much to explain just yet (it's all still so heavily in flux that any attempts to describe it would be invalidated the next day). I'll have more details soon, but the gist is to use Markdown while handling certain code blocks in special ways.
 
 More to come ...
+
+:hp-tags: markdown, if, interactive-fiction, text-adventure
