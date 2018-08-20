@@ -1,0 +1,45 @@
+= Convert snake_case to camelCase
+:published_at: 2019-01-31
+:hp-tags: refactor, snake-case, camel-case, convert
+:hp-alt-title: Convert snake_case to camelCase in Vim
+
+Having begun a project (https://ugotsta.github.io/gitdown/[GitDown]) using snake_case for variables and functions, I needed an easy way to change to camelCase after realizing most JavaScript libraries use that. I figured it wouldn't be that difficult, but 
+
+== Using Vim
+
+Open a file in Vim, type `:` and enter:
+....
+%s/_\([a-zA-Z]\)/\u\1/g
+....
+
+That will automatically convert (refactor) text in snake_case format to camelCase throughout the entire document.
+
+You can then enter `:wq` and to save the changes and quit.
+
+Credits for this one belong to Sean C. here:
+https://superuser.com/questions/312073/use-notepad-to-change-under-score-case-to-camelcase#answer-312084[Use Notepad++ to change under_score_case to CamelCase?]
+
+I've posted that to GitHub Gist for quick reference:
+https://gist.github.com/d579a8e96bac4d25a95af1f4236c75b0
+
+== Using VS Code
+
+I initially tried using VS Code, only to learn it uses JavaScript-style regular expressions for the replace feature which meant switches like the ones used in the above method in Vim wouldn't work. It's still possible via some extra keypresses though.
+
+VS Code workflow:
+
+* Press `CTRL-H`.
+* Press `ALT-R`.
+* Type `_([a-zA-Z])`.
+* Press `TAB` and type `$1`.
+* Press `ALT-ENTER`.
+* Press `F1` and type `u`, then press `ENTER`.
+* Press `CTRL-ALT-ENTER`.
+
+And that's also posted here:
+https://gist.github.com/Ugotsta/2a271f6440f1ac7e028df55e94035e40/edit
+
+== Other editors
+
+That VS Code workflow would work similarly in Atom, just with slightly different default key bindings. Meanwhile, editors like Emacs (see http://codehamster.blogspot.com/2012/03/emacs-underscores-to-camelcase.html[Code Hamster post], Sublime Text (see https://github.com/Microsoft/vscode/issues/12185[VS Code issue] and Notepad++ (see https://superuser.com/questions/312073/use-notepad-to-change-under-score-case-to-camelcase[superuser answer]) can handle it through regular expression switches similar to Vim.
+
