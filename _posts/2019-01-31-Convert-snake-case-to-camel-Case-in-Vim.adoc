@@ -1,5 +1,4 @@
 = Convert snake_case to camelCase
-:published_at: 2019-01-31
 :hp-tags: refactor, snake-case, camel-case, convert
 :hp-alt-title: Convert snake_case to camelCase in Vim
 
